@@ -21,9 +21,4 @@ async def add(ctx, left: int, right: int):
     """Adds two numbers together."""
     await ctx.send(left + right)
 
-@cool.command(name='bot')
-async def _bot(ctx):
-    """Is the bot cool?"""
-    await ctx.send('Yes, the bot is cool.')
-
 bot.run(os.environ["BOT_TOKEN"])
