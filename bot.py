@@ -17,7 +17,6 @@ async def on_ready():
     print('------')
 
 @bot.command()
-discord.ext.commands.has_role("534511381341405184")
 async def add(ctx, left: int, right: int):
     """Adds two numbers together."""
     await ctx.send(left + right)
