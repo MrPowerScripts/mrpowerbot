@@ -1,0 +1,13 @@
+{
+  "name": "MrPowerBot",
+  "description": "Discord Bot",
+  "repository": "git@github.com:MrPowerScripts/mrpowerbot",
+  "logo": "https://mrpowerscripts.com/images/twilightyellow.png",
+  "keywords": ["boom2"],
+  "env": {
+    "BOT_TOKEN": {
+      "description": "token for the bot",
+      "Value": "some token"
+    }
+  }
+}
