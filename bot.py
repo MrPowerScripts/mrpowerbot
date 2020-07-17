@@ -22,9 +22,9 @@ async def on_ready():
 async def streamer(ctx, user: discord.Member):
   role = discord.utils.get(user.guild.roles, name=STREAMER_ROLE)
   if role in user.roles:
-    await discord.Member.remove_roles(user.id, role)
+    await user.remove_roles(role)
   else:
-    await discord.Member.add_roles(user.id, role)
+    await user.add_roles(role)
 
 @bot.command()
 async def add(ctx, left: int, right: int):
