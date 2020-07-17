@@ -20,7 +20,7 @@ async def on_ready():
 @bot.command()
 @commands.has_role(MOD_ROLE)
 async def streamer(ctx, user: discord.Member):
-  role = get(member.server.roles, name=STREAMER_ROLE)
+  role = discord.utils.get(user.server.roles, name=STREAMER_ROLE)
   if role in user.roles:
     await discord.Member.remove_roles(user, role)
   else:
