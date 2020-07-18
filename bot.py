@@ -20,15 +20,15 @@ async def on_ready():
 @bot.command()
 @commands.has_role(MOD_ROLE)
 async def streamer(ctx, user: discord.Member):
-  print(user)
-  print(user.guild.roles)
   role = discord.utils.get(user.guild.roles, id=STREAMER_ROLE)
-  print(role)
-  print(user.roles)
-  if role in user.roles:
-    await user.remove_roles(role)
-  else:
-    await user.add_roles(role)
+  try:
+    if role in user.roles:
+      await user.remove_roles(role)
+    else:
+      await user.add_roles(role)
+    ctx.message.add_reaction("✅")
+  except Exception as e:
+    ctx.message.add_reaction("❌")
 
 @bot.command()
 async def add(ctx, left: int, right: int):
