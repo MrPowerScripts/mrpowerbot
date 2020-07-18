@@ -22,7 +22,7 @@ async def on_ready():
 async def streamer(ctx, user: discord.Member):
   print(user)
   print(user.guild.roles)
-  role = discord.utils.get(user.guild.roles, name=STREAMER_ROLE)
+  role = discord.utils.get(user.guild.roles, id=STREAMER_ROLE)
   print(role)
   print(user.roles)
   if role in user.roles:
