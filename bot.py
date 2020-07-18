@@ -24,9 +24,10 @@ async def streamer(ctx, user: discord.Member):
   try:
     if role in user.roles:
       await user.remove_roles(role)
+      await ctx.message.add_reaction("❎")
     else:
       await user.add_roles(role)
-    await ctx.message.add_reaction("✅")
+      await ctx.message.add_reaction("✅")
   except Exception as e:
     await ctx.message.add_reaction("❌")
 
