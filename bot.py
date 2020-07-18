@@ -20,6 +20,8 @@ async def on_ready():
 @bot.command()
 @commands.has_role(MOD_ROLE)
 async def streamer(ctx, user: discord.Member):
+  print(user)
+  print(user.guild.roles)
   role = discord.utils.get(user.guild.roles, name=STREAMER_ROLE)
   print(role)
   print(user.roles)
