@@ -8,7 +8,6 @@ from utils import (
 )
 import random
 import os
-import json
 
 description = '''An example bot to showcase the discord.ext.commands extension
 module.
