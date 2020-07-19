@@ -1,6 +1,11 @@
 import discord
 from discord.ext import commands
-from utils import MOD_ROLE, STREAMER_ROLE, LOG_CHANNEL
+from utils import (
+  MOD_ROLE, 
+  STREAMER_ROLE, 
+  LOG_CHANNEL,
+  REVISION,
+)
 import random
 import os
 import json
@@ -14,14 +19,8 @@ bot = commands.Bot(command_prefix='%', description=description)
 @bot.event
 async def on_ready():
     print('Logged in as')
-    dyno_data = open("/etc/heroku/dyno").read()
-    print(dyno_data)
-    dyno_data = json.loads(dyno_data)
-    print(dyno_data)
-    dyno_data = dyno_data.get("release").get("commit")[0:7]
-    print(dyno_data)
     log_channel = discord.utils.get(bot.get_all_channels(), id=LOG_CHANNEL)
-    await log_channel.send(f"HELLO WORLD! I'm MrPowerBot v{dyno_data}")
+    await log_channel.send(f"HELLO WORLD! I'm MrPowerBot v{REVISION}")
     print(bot.user.name)
     print(bot.user.id)
     print('------')
