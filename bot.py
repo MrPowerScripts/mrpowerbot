@@ -16,8 +16,12 @@ async def on_ready():
     print('Logged in as')
     dyno_data = open("/etc/heroku/dyno").read()
     print(dyno_data)
+    dyno_data = json.loads(dyno_data)
+    print(dyno_data)
+    dyno_data = dyno_data.get("release").get("commit")[0:7]
+    print(dyno_data)
     log_channel = discord.utils.get(bot.get_all_channels(), id=LOG_CHANNEL)
-    # await log_channel.send(f"HELLO WORLD! I'm MrPowerBot v{json.loads(dyno_data)["release"]["commit"][0:7]}")
+    await log_channel.send(f"HELLO WORLD! I'm MrPowerBot v{}")
     print(bot.user.name)
     print(bot.user.id)
     print('------')
