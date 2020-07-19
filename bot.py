@@ -19,7 +19,7 @@ bot = commands.Bot(command_prefix='%', description=description)
 async def on_ready():
     print('Logged in as')
     log_channel = discord.utils.get(bot.get_all_channels(), id=LOG_CHANNEL)
-    await log_channel.send(f"HELLO WORLD! I'm MrPowerBot v{REVISION}")
+    await log_channel.send(f"HELLO WORLD! I'm MrPowerBot@{REVISION}")
     print(bot.user.name)
     print(bot.user.id)
     print('------')
