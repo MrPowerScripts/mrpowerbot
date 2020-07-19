@@ -21,7 +21,7 @@ async def on_ready():
     dyno_data = dyno_data.get("release").get("commit")[0:7]
     print(dyno_data)
     log_channel = discord.utils.get(bot.get_all_channels(), id=LOG_CHANNEL)
-    await log_channel.send(f"HELLO WORLD! I'm MrPowerBot v{}")
+    await log_channel.send(f"HELLO WORLD! I'm MrPowerBot v{dyno_data}")
     print(bot.user.name)
     print(bot.user.id)
     print('------')
