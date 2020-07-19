@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from utils import MOD_ROLE, STREAMER_ROLE
+from utils import MOD_ROLE, STREAMER_ROLE, LOG_CHANNEL
 import random
 import os
 
@@ -13,6 +13,8 @@ bot = commands.Bot(command_prefix='%', description=description)
 @bot.event
 async def on_ready():
     print('Logged in as')
+    log_channel = discord.utils.get(bot.get_all_channels(), id=LOG_CHANNEL)
+    log_channel.message.send(f"HELLO WORLD! I'm MrPowerBot v${os.environ['SOURCE_VERSION']}")
     print(bot.user.name)
     print(bot.user.id)
     print('------')
