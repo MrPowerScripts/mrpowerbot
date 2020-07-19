@@ -3,6 +3,7 @@ from discord.ext import commands
 from utils import MOD_ROLE, STREAMER_ROLE, LOG_CHANNEL
 import random
 import os
+import json
 
 description = '''An example bot to showcase the discord.ext.commands extension
 module.
@@ -14,7 +15,7 @@ bot = commands.Bot(command_prefix='%', description=description)
 async def on_ready():
     print('Logged in as')
     log_channel = discord.utils.get(bot.get_all_channels(), id=LOG_CHANNEL)
-    await log_channel.send(f"HELLO WORLD! I'm MrPowerBot v{os.environ['SOURCE_VERSION'][0:7]}")
+    await log_channel.send(f"HELLO WORLD! I'm MrPowerBot v{json.loads(open("/etc/heroku/dyno").read())["release"]["commit"][0:7]}")
     print(bot.user.name)
     print(bot.user.id)
     print('------')
