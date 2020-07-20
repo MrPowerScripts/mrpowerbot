@@ -16,5 +16,6 @@ def status_check():
   
   except Exception as e:
     print(e)
+    raise e
   finally:
     cursor.close()
