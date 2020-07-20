@@ -6,6 +6,7 @@ from utils import (
   LOG_CHANNEL,
   REVISION,
 )
+import db
 import random
 import os
 
@@ -20,6 +21,13 @@ async def on_ready():
     print('Logged in as')
     log_channel = discord.utils.get(bot.get_all_channels(), id=LOG_CHANNEL)
     await log_channel.send(f"HELLO WORLD! I'm MrPowerBot@{REVISION}")
+    try:
+      version = db.status_check()
+      await log_channel.send(f"I'm connected to Postgres! {version}")
+    except:
+      await log_channel.send(f"Posrgres connection failed 😭😭😭")
+
+    
     print(bot.user.name)
     print(bot.user.id)
     print('------')
