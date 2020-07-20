@@ -7,8 +7,8 @@ conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 
 def status_check():
+  cursor = conn.cursor()
   try:
-    cursor = conn.cursor()
     cursor.execute("SELECT version();")
     version cursor.fetchone()
     cursor.close()
