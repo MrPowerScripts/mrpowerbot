@@ -10,7 +10,7 @@ def status_check():
   cursor = conn.cursor()
   try:
     cursor.execute("SELECT version();")
-    version cursor.fetchone()
+    version = cursor.fetchone()
     cursor.close()
     return version
   
