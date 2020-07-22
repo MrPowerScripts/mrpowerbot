@@ -31,10 +31,10 @@ async def on_ready():
   print(bot.user.id)
   print('------')
 
-@bot.event
-async def on_message(message):
-  if bot.user.mentioned_in(message) and message.mention_everyone is False:
-    await message.channel.send(f"hello! I'm awake! `{prefix}help` for help")
+# @bot.event
+# async def on_message(message):
+#   if bot.user.mentioned_in(message) and message.mention_everyone is False:
+#     await message.channel.send(f"hello! I'm awake! `{prefix}help` for help")
 
 @bot.event
 async def on_raw_reaction_add(payload):
