@@ -53,7 +53,7 @@ async def add(ctx, left: int, right: int):
   await ctx.send(left + right)
 
 @bot.command()
-async def register(ctx)
+async def register(ctx):
   user_id = ctx.mmessage.user.id
   print(user_id)
   # db.register_user(user_id)
