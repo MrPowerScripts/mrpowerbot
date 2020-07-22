@@ -55,8 +55,8 @@ async def add(ctx, left: int, right: int):
 @bot.command()
 async def register(ctx):
   user_id = ctx.message.author.id
-  print(user_id)
-  # db.register_user(user_id)
+  print(f"registering {user_id}")
+  db.register_user(user_id)
 
 
 bot.run(os.environ["BOT_TOKEN"])

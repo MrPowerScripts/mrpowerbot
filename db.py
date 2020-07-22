@@ -12,7 +12,7 @@ def preparedb():
       CREATE TABLE IF NOT EXISTS users
       (
         id serial,
-        discord_id integer,
+        discord_id integer UNIQUE,
         zaps integer
       );
     """)
