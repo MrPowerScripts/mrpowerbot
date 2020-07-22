@@ -35,13 +35,9 @@ async def on_ready():
 @bot.event
 async def on_raw_reaction_add(payload):
   print(payload)
-  print(payload.channel_id)
   channel = discord.utils.get(bot.get_all_channels(), id=payload.channel_id)
-  print(channel)
   message = await channel.fetch_message(payload.message_id)
-  print(message)
   receiver = message.author.id
-  print(receiver)
   if receiver == payload.user_id:
     print("emoji from author")
   else:
