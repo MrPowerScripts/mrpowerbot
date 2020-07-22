@@ -52,6 +52,22 @@ def zap(discord_id):
   finally:
     cursor.close()
 
+def zaps(discord_id):
+  cursor = conn.cursor()
+  try:
+    cursor.execute("""
+    SELECT zaps
+    FROM users 
+    WHERE discord_id = %(discord_id)s;
+    """, {"discord_id": int(discord_id)})
+    zaps = cursor.fetchone()
+    return zaps
+  except Exception as e:
+    print(e)
+    raise e
+  finally:
+    cursor.close()
+
 def status_check():
   cursor = conn.cursor()
   try:

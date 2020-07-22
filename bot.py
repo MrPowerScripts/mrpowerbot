@@ -27,8 +27,6 @@ async def on_ready():
     await log_channel.send(f"I'm connected to Postgres! {version}")
   except:
     await log_channel.send(f"Posrgres connection failed 😭😭😭")
-
-  
   print(bot.user.name)
   print(bot.user.id)
   print('------')
@@ -79,5 +77,10 @@ async def register(ctx):
   print(f"registering {user_id}")
   db.register_user(user_id)
 
+@bot.command()
+async def zaps(ctx):
+  print(f"zaps {user_id}")
+  zaps = db.zaps()
+  ctx.message.send(f"{ctx.message.author.namme}: {str(zaps)}")
 
 bot.run(os.environ["BOT_TOKEN"])
