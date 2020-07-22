@@ -10,7 +10,7 @@ import db
 import random
 import os
 
-prefix='&'
+prefix=';'
 description = '''An example bot to showcase the discord.ext.commands extension
 module. There are a number of utility commands being showcased here.'''
 client = discord.Client()
