@@ -15,7 +15,8 @@ def preparedb():
         discord_id integer,
         zaps integer
       );
-    """)   
+    """)
+    conn.commit()
   except Exception as e:
     print(e)
     raise e
