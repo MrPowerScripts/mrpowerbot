@@ -79,7 +79,7 @@ async def register(ctx):
 
 @bot.command()
 async def zaps(ctx):
-  print(f"zaps {ctx.message.auhtor.name}")
+  print(f"zaps {ctx.message.author.name}")
   zaps = db.zaps()
   ctx.message.send(f"{ctx.message.author.name}: {str(zaps)}")
 
