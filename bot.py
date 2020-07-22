@@ -36,7 +36,7 @@ async def on_ready():
 @bot.event
 async def on_raw_reaction_add(ctx):
   print(ctx)
-  print(ctx.guilds)
+  print(ctx.guild)
   # if reaction.emoji == '⚡':
   #   if reaction.event_type == 'REACTION_ADD'
   #     if reaction.
