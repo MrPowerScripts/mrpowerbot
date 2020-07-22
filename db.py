@@ -11,8 +11,8 @@ def preparedb():
     cursor = cursor.execute("""
       CREATE TABLE IF NOT EXISTS users
       (
-        id serial
-        discord_id integer
+        id serial,
+        discord_id integer,
         zaps integer
       );
     """)   
