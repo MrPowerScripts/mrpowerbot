@@ -37,6 +37,21 @@ def register_user(discord_id):
   finally:
     cursor.close()
 
+def zap(discord_id):
+  cursor = conn.cursor()
+  try:
+    cursor.execute("""
+    UPDATE users 
+    SET zaps = zaps + 1
+    WHERE discord_id = %(discord_id)s
+    """, {"discord_id": int(discord_id)})
+    conn.commit()
+  except Exception as e:
+    print(e)
+    raise e
+  finally:
+    cursor.close()
+
 def status_check():
   cursor = conn.cursor()
   try:
