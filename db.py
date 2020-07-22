@@ -8,7 +8,7 @@ conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 def preparedb():
   cursor = conn.cursor()
   try:
-    cursor = cursor.execute("""
+    cursor.execute("""
       CREATE TABLE IF NOT EXISTS users
       (
         id serial,
