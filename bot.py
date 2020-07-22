@@ -10,10 +10,11 @@ import db
 import random
 import os
 
+prefix=';'
 description = '''An example bot to showcase the discord.ext.commands extension
 module. There are a number of utility commands being showcased here.'''
 client = discord.Client()
-bot = commands.Bot(command_prefix='%', description=description)
+bot = commands.Bot(command_prefix=prefix, description=description)
 
 @bot.event
 async def on_ready():
@@ -31,6 +32,11 @@ async def on_ready():
   print(bot.user.name)
   print(bot.user.id)
   print('------')
+
+@bot.event
+async def on_message(message):
+  if bot.user.mentioned_in(message) and message.mention_everyone is False:
+    await message.channel.send("hello! I'm awake! f{prefix}help for help")
 
 @bot.event
 async def on_raw_reaction_add(payload):
