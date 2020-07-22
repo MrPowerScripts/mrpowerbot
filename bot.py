@@ -36,7 +36,7 @@ async def on_ready():
 @bot.event
 async def on_message(message):
   if bot.user.mentioned_in(message) and message.mention_everyone is False:
-    await message.channel.send("hello! I'm awake! f{prefix}help for help")
+    await message.channel.send(f"hello! I'm awake! {prefix}help for help")
 
 @bot.event
 async def on_raw_reaction_add(payload):
