@@ -36,7 +36,7 @@ async def on_ready():
 async def on_raw_reaction_add(payload):
   print(payload)
   print(payload.channel_id)
-  channel = discord.utils.get(bot.get_all_channels(), id=payload.id)
+  channel = discord.utils.get(bot.get_all_channels(), id=payload.channel_id)
   print(channel)
   message = channel.fetch_message(payload.message_id)
   print(message)
