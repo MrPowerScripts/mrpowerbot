@@ -5,6 +5,23 @@ DATABASE_URL = os.environ['DATABASE_URL']
 
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
+def preparedb():
+  cursor = conn.cursor()
+  try:
+    cursor = cursor.execute("""
+      CREATE TABLE IF NOT EXISTS users
+      (
+        id serial
+        discord_id integer
+        zaps integer
+      );
+    """)   
+  except Exception as e:
+    print(e)
+    raise e
+  finally:
+    cursor.close()
+
 
 def status_check():
   cursor = conn.cursor()
@@ -19,3 +36,4 @@ def status_check():
     raise e
   finally:
     cursor.close()
+

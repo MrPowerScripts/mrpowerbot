@@ -19,6 +19,7 @@ bot = commands.Bot(command_prefix='%', description=description)
 @bot.event
 async def on_ready():
     print('Logged in as')
+    db.preparedb()
     log_channel = discord.utils.get(bot.get_all_channels(), id=LOG_CHANNEL)
     await log_channel.send(f"HELLO WORLD! I'm MrPowerBot@{REVISION}")
     try:
