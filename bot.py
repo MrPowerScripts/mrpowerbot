@@ -11,9 +11,8 @@ import random
 import os
 
 description = '''An example bot to showcase the discord.ext.commands extension
-module.
-
-There are a number of utility commands being showcased here.'''
+module. There are a number of utility commands being showcased here.'''
+client = discord.Client()
 bot = commands.Bot(command_prefix='%', description=description)
 
 @bot.event
@@ -36,8 +35,10 @@ async def on_ready():
 @bot.event
 async def on_raw_reaction_add(payload):
   print(payload)
-  message = bot.get_message(payload.message_id)
-  if message.author.id == payload.user_id:
+  message = bot.mess (payload.message_id)
+  receiver = client.fetch_channel(payload.channel_id).fetch_message(payload.message_id).author.id
+  print(receiver)
+  if receiver == payload.user_id:
     print("emoji from author")
   # else:
   #   db.zap(message.author.id)
