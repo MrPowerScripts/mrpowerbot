@@ -35,7 +35,6 @@ async def on_ready():
 @bot.event
 async def on_raw_reaction_add(payload):
   print(payload)
-  message = bot.mess (payload.message_id)
   receiver = client.fetch_channel(payload.channel_id).fetch_message(payload.message_id).author.id
   print(receiver)
   if receiver == payload.user_id:
