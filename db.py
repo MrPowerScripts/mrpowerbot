@@ -43,7 +43,7 @@ def zap(discord_id):
     cursor.execute("""
     UPDATE users 
     SET zaps = zaps + 1
-    WHERE discord_id = %(discord_id)s
+    WHERE discord_id = %(discord_id)s;
     """, {"discord_id": int(discord_id)})
     conn.commit()
   except Exception as e:
