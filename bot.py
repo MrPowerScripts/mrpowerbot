@@ -44,13 +44,12 @@ async def on_raw_reaction_add(payload):
   print(receiver)
   if receiver == payload.user_id:
     print("emoji from author")
-  # else:
-  #   db.zap(message.author.id)
-  #   print("zapped!")
-  # if reaction.emoji == '⚡':
-  #   if reaction.event_type == 'REACTION_ADD'
-  #     if reaction.
-  #     db.zap(user.id)
+  else:
+    if reaction.emoji == '⚡':
+      if reaction.event_type == 'REACTION_ADD'
+      db.zap(receiver)
+      print("zapped!")
+
     #do stuff
 
 @bot.command()
