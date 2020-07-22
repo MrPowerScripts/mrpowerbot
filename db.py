@@ -61,7 +61,7 @@ def zaps(discord_id):
     WHERE discord_id = %(discord_id)s;
     """, {"discord_id": int(discord_id)})
     zaps = cursor.fetchone()
-    return zaps
+    return zaps[0]
   except Exception as e:
     print(e)
     raise e
