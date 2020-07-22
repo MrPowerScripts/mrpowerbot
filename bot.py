@@ -36,7 +36,7 @@ async def on_ready():
 @bot.event
 async def on_raw_reaction_add(payload):
   print(payload)
-  message = client.get_message(payload.message_id)
+  message = bot.get_message(payload.message_id)
   if message.author.id == payload.user_id:
     print("emoji from author")
   # else:
