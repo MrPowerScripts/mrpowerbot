@@ -12,8 +12,8 @@ def preparedb():
       CREATE TABLE IF NOT EXISTS users
       (
         id serial,
-        discord_id integer UNIQUE,
-        zaps integer
+        discord_id bigint UNIQUE,
+        zaps bigint
       );
     """)
     conn.commit()
