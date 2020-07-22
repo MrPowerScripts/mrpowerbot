@@ -29,7 +29,7 @@ def register_user(discord_id):
     cursor.execute("""
     INSERT INTO users ("discord_id","zaps") 
     values ('%(discord_id)s', 0)
-    """, {"discord_id": discord_id})
+    """, {"discord_id": int(discord_id)})
     conn.commit()
   except Exception as e:
     print(e)
