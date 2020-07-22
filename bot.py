@@ -80,7 +80,7 @@ async def register(ctx):
 @bot.command()
 async def zaps(ctx):
   print(f"zaps {ctx.message.author.name}")
-  zaps = db.zaps()
+  zaps = db.zaps(ctx.message.author.id)
   ctx.message.send(f"{ctx.message.author.name}: {str(zaps)}")
 
 bot.run(os.environ["BOT_TOKEN"])
