@@ -54,7 +54,7 @@ async def add(ctx, left: int, right: int):
 
 @bot.command()
 async def register(ctx):
-  user_id = ctx.mmessage.user.id
+  user_id = ctx.message.user.id
   print(user_id)
   # db.register_user(user_id)
 
