@@ -27,7 +27,7 @@ def register_user(discord_id):
   cursor = conn.cursor()
   try:
     cursor.execute("""
-    ISERT INTO users ("discord_id","zaps") 
+    INSERT INTO users ("discord_id","zaps") 
     values ('%(discord_id)s', 0)
     """, {"discord_id": discord_id})
     conn.commit()
