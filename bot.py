@@ -33,7 +33,7 @@ async def on_ready():
   print(bot.user.id)
   print('------')
 
-@bot.event()
+@bot.event
 async def on_raw_reaction_add(ctx):
   print(ctx)
   # if reaction.emoji == '⚡':
