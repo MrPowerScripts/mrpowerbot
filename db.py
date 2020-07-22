@@ -23,6 +23,19 @@ def preparedb():
   finally:
     cursor.close()
 
+def register_user(discord_id):
+  cursor = conn.cursor()
+  try:
+    cursor.execute("""
+    ISERT INTO users ("discord_id","zaps") 
+    values ('%(discord_id)s', 0)
+    """, {"discord_id": discord_id})
+    conn.commit()
+  except Exception as e:
+    print(e)
+    raise e
+  finally:
+    cursor.close()
 
 def status_check():
   cursor = conn.cursor()

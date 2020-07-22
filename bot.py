@@ -49,7 +49,14 @@ async def streamer(ctx, user: discord.Member):
 
 @bot.command()
 async def add(ctx, left: int, right: int):
-    """Adds two numbers together."""
-    await ctx.send(left + right)
+  """Adds two numbers together."""
+  await ctx.send(left + right)
+
+@bot.command()
+async def register(ctx)
+  user_id = ctx.mmessage.user.id
+  print(user_id)
+  # db.register_user(user_id)
+
 
 bot.run(os.environ["BOT_TOKEN"])
