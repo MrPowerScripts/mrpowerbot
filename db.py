@@ -44,7 +44,7 @@ def zap(discord_id):
     INSERT INTO users ("discord_id","zaps") 
     VALUES ('%(discord_id)s', 0)
     ON CONFLICT (discord_id) DO UPDATE
-    SET zaps = zaps + 1;
+    SET zaps = users.zaps + 1;
     """, {"discord_id": int(discord_id)})
     conn.commit()
   except Exception as e:
