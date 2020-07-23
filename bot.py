@@ -24,7 +24,7 @@ async def on_ready():
   await log_channel.send(f"HELLO WORLD! I'm MrPowerBot@{REVISION}")
   try:
     version = db.status_check()
-    await log_channel.send(f"I'm connected to Postgres! {version}")
+    await log_channel.send(f"`I'm connected to Postgres! {version}`")
   except:
     await log_channel.send(f"Posrgres connection failed 😭😭😭")
   print(bot.user.name)
