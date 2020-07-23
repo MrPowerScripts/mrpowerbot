@@ -47,7 +47,7 @@ async def on_raw_reaction_add(payload):
   else:
     print("checking if zap")
     print(f"emoji is: {payload.emoji}")
-    if payload.emoji == ⚡:
+    if payload.emoji == "⚡":
       print("is zap. checking add")
       if payload.event_type == 'REACTION_ADD':
         print(f"is add, going to zap {receiver}")
