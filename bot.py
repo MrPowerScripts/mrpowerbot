@@ -45,8 +45,11 @@ async def on_raw_reaction_add(payload):
   if receiver == payload.user_id:
     print("emoji from author")
   else:
+    print("checking if zap")
     if payload.emoji == '⚡':
+      print("is zap. checking add")
       if payload.event_type == 'REACTION_ADD':
+        print(f"is add, going to zap {receiver}")
         db.zap(receiver)
         print("zapped!")
 
