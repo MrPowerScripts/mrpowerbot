@@ -28,7 +28,7 @@ def register_user(discord_id):
   try:
     cursor.execute("""
     INSERT INTO users ("discord_id","zaps") 
-    values ('%(discord_id)s', 0)
+    VALUES ('%(discord_id)s', 0)
     """, {"discord_id": int(discord_id)})
     conn.commit()
   except Exception as e:
@@ -41,9 +41,10 @@ def zap(discord_id):
   cursor = conn.cursor()
   try:
     cursor.execute("""
-    UPDATE users 
-    SET zaps = zaps + 1
-    WHERE discord_id = %(discord_id)s;
+    INSERT INTO users ("discord_id","zaps") 
+    VALUES ('%(discord_id)s', 0)
+    ON CONFLICT (discord_id) DO UPDATE
+    SET zaps = zaps + 1;
     """, {"discord_id": int(discord_id)})
     conn.commit()
   except Exception as e:
