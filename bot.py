@@ -9,6 +9,7 @@ from utils import (
 import db
 import random
 import os
+import sys
 
 prefix=';'
 description = '''An example bot to showcase the discord.ext.commands extension
@@ -69,6 +70,12 @@ async def streamer(ctx, user: discord.Member):
       await ctx.message.add_reaction("✅")
   except Exception as e:
     await ctx.message.add_reaction("❌")
+
+@bot.command()
+@commands.has_role(MOD_ROLE)
+async def reboot(ctx):
+  await ctx.channel.send(f"restarting bot")
+  sys.exit()
 
 @bot.command()
 async def add(ctx, left: int, right: int):
