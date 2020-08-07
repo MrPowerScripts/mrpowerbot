@@ -4,6 +4,7 @@ from utils import (
   MOD_ROLE, 
   STREAMER_ROLE, 
   LOG_CHANNEL,
+  ROUNDTABLE_ROLE,
   REVISION,
 )
 import db
@@ -61,6 +62,20 @@ async def on_raw_reaction_add(payload):
 @commands.has_role(MOD_ROLE)
 async def streamer(ctx, user: discord.Member):
   role = discord.utils.get(user.guild.roles, id=STREAMER_ROLE)
+  try:
+    if role in user.roles:
+      await user.remove_roles(role)
+      await ctx.message.add_reaction("❎")
+    else:
+      await user.add_roles(role)
+      await ctx.message.add_reaction("✅")
+  except Exception as e:
+    await ctx.message.add_reaction("❌")
+
+@bot.command()
+@commands.has_role(MOD_ROLE)
+async def roundtable(ctx, user: discord.Member):
+  role = discord.utils.get(user.guild.roles, id=ROUNDTABLE_ROLE)
   try:
     if role in user.roles:
       await user.remove_roles(role)
