@@ -79,7 +79,6 @@ def zap_leaders():
     LIMIT 10;
     """)
     zaps = cursor.fetchall()
-    console.log(zaps)
     return zaps
   except Exception as e:
     print(e)
