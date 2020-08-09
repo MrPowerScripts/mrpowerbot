@@ -113,6 +113,8 @@ async def zaps(ctx):
 async def zapleaders(ctx):
   zaps = db.zap_leaders()
   print(zaps)
-  # await ctx.message.channel.send(f"{ctx.message.author.name}: {str(zaps)}")
+  message = '\n'.join(map(str, tups))
+
+  await ctx.message.channel.send(f"{message}")
 
 bot.run(os.environ["BOT_TOKEN"])

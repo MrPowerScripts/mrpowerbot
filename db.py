@@ -74,7 +74,7 @@ def zap_leaders():
   cursor = conn.cursor()
   try:
     cursor.execute("""
-    SELECT zaps, discord_id
+    SELECT zaps, username
     FROM users
     ORDER BY zaps DESC
     LIMIT 10;
