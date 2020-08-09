@@ -43,9 +43,9 @@ def zap(user):
   try:
     cursor.execute("""
     INSERT INTO users ("discord_id","zaps") 
-    VALUES ('%(discord_id)s', 0)
+    VALUES (%(discord_id)s, 0)
     ON CONFLICT (discord_id) DO UPDATE
-    SET zaps = users.zaps + 1, username = '%(username)s';
+    SET zaps = users.zaps + 1, username = %(username)s;
     """, {"discord_id": int(user.id), "username": user.name})
     conn.commit()
   except Exception as e:
