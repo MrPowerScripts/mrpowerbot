@@ -1,4 +1,5 @@
 import discord
+import asnycio
 from discord.ext import commands
 from utils import (
   MOD_ROLE, 
@@ -140,5 +141,17 @@ async def zapleaders(ctx):
   message = '\n'.join(map(str, zaps))
 
   await ctx.message.channel.send(f"{message}")
+
+async def monsters():
+    await bot.wait_until_ready()
+    counter = 0
+    channel = discord.Object(id='')
+    while not bot.is_closed:
+        counter += 1
+        # await bot.send_message(channel, counter)
+        print(counter)
+        await asyncio.sleep(10) # task runs every 60 seconds
+
+bot.loop.create_task(monsters())
 
 bot.run(os.environ["BOT_TOKEN"])
