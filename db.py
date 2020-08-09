@@ -69,6 +69,23 @@ def zaps(discord_id):
   finally:
     cursor.close()
 
+def zap_leaders():
+  cursor = conn.cursor()
+  try:
+    cursor.execute("""
+    SELECT zaps, discord_id
+    FROM users
+    LIMIT 10 DESC;
+    """)
+    zaps = cursor.fetchall()
+    console.log(zaps)
+    return zaps
+  except Exception as e:
+    print(e)
+    raise e
+  finally:
+    cursor.close()
+
 def status_check():
   cursor = conn.cursor()
   try:
