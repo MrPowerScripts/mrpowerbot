@@ -26,7 +26,7 @@ async def on_ready():
   for guild in bot.guilds:
     if guild.id != MRPS_GUILD:
       print(f"leaving: {guild.name}")
-      guild.leave()
+      await guild.leave()
 
   print('Logged in as')
   db.preparedb()
