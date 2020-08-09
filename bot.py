@@ -113,7 +113,7 @@ async def zaps(ctx):
 async def zapleaders(ctx):
   zaps = db.zap_leaders()
   print(zaps)
-  message = '\n'.join(map(str, tups))
+  message = '\n'.join(map(str, zaps))
 
   await ctx.message.channel.send(f"{message}")
 
