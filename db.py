@@ -38,14 +38,18 @@ def register_user(discord_id):
   finally:
     cursor.close()
 
-def zap(user):
+def zap(user, remove=False):
+  if remove:
+    operator = "-"
+  else:
+    operator = "+"
   cursor = conn.cursor()
   try:
     cursor.execute("""
     INSERT INTO users ("discord_id","zaps") 
     VALUES (%(discord_id)s, 0)
     ON CONFLICT (discord_id) DO UPDATE
-    SET zaps = users.zaps + 1, username = %(username)s;
+    SET zaps = users.zaps {operator} 1, username = %(username)s;
     """, {"discord_id": int(user.id), "username": user.name})
     conn.commit()
   except Exception as e:

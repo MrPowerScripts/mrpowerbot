@@ -56,7 +56,23 @@ async def on_raw_reaction_add(payload):
         db.zap(receiver)
         print("zapped!")
 
-    #do stuff
+@bot.event
+async def on_raw_reaction_remove(payload):
+  print(payload)
+  channel = discord.utils.get(bot.get_all_channels(), id=payload.channel_id)
+  message = await channel.fetch_message(payload.message_id)
+  receiver = message.author
+  if receiver == payload.user_id:
+    print("emoji from author")
+  else:
+    print("checking if zap")
+    print(f"emoji is: {payload.emoji}")
+    if str(payload.emoji) == "⚡":
+      print("is zap. checking remove")
+      if payload.event_type == 'REACTION_REMOVE':
+        print(f"is remove, going to remove zap from {receiver}")
+        db.zap(receiver, remove=True)
+        print("zapped!")
 
 @bot.command()
 @commands.has_role(MOD_ROLE)
