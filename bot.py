@@ -1,5 +1,5 @@
 import discord
-import asnycio
+import asyncio
 from discord.ext import commands
 from utils import (
   MOD_ROLE, 
