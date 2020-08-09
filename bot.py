@@ -6,6 +6,7 @@ from utils import (
   LOG_CHANNEL,
   ROUNDTABLE_ROLE,
   REVISION,
+  MRPS_GUILD,
 )
 import db
 import random
@@ -20,6 +21,13 @@ bot = commands.Bot(command_prefix=prefix, description=description)
 
 @bot.event
 async def on_ready():
+
+  print(bot.guilds)
+  for guild in bot.guilds:
+    if guild.id != MRPS_GUILD:
+      print(f"leaving: {guild.name}")
+      guild.leave()
+
   print('Logged in as')
   db.preparedb()
   log_channel = discord.utils.get(bot.get_all_channels(), id=LOG_CHANNEL)
