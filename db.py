@@ -49,7 +49,7 @@ def zap(user, remove=False):
     INSERT INTO users ("discord_id","zaps") 
     VALUES (%(discord_id)s, 0)
     ON CONFLICT (discord_id) DO UPDATE
-    SET zaps = users.zaps %{operator}s 1, username = %(username)s;
+    SET zaps = users.zaps %(operator)s 1, username = %(username)s;
     """, {"discord_id": int(user.id), 
           "username": user.name,
           "operator": operator})
