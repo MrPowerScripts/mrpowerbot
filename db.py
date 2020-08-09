@@ -75,7 +75,8 @@ def zap_leaders():
     cursor.execute("""
     SELECT zaps, discord_id
     FROM users
-    LIMIT 10 DESC;
+    ORDER BY zaps DESC
+    LIMIT 10;
     """)
     zaps = cursor.fetchall()
     console.log(zaps)
