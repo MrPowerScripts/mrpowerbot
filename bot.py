@@ -1,5 +1,6 @@
 import discord
 import asyncio
+import datetime
 from discord.ext import commands
 from utils import (
   MOD_ROLE, 
@@ -55,6 +56,8 @@ async def on_raw_reaction_add(payload):
   receiver = message.author.id
   if receiver == payload.user_id:
     print("emoji from author")
+  elif message.created_at.timestamp() >= (datetime.datetime.now().timestamp() - 300):
+    print("message too old")
   else:
     print("checking if zap")
     print(f"emoji is: {payload.emoji}")
@@ -73,6 +76,8 @@ async def on_raw_reaction_remove(payload):
   receiver = message.author.id
   if receiver == payload.user_id:
     print("emoji from author")
+  elif message.created_at.timestamp() >= (datetime.datetime.now().timestamp() - 300):
+    print("message too old")
   else:
     print("checking if zap")
     print(f"emoji is: {payload.emoji}")
