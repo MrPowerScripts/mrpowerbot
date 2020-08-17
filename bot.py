@@ -53,8 +53,8 @@ async def on_raw_reaction_add(payload):
   print(payload)
   channel = discord.utils.get(bot.get_all_channels(), id=payload.channel_id)
   message = await channel.fetch_message(payload.message_id)
-  receiver = message.author.id
-  if receiver == payload.user_id:
+  receiver = message.author
+  if receiver.id == payload.user_id:
     print("emoji from author")
   elif message.created_at.timestamp() >= (datetime.datetime.now().timestamp() - 300):
     print("message too old")
@@ -73,8 +73,8 @@ async def on_raw_reaction_remove(payload):
   print(payload)
   channel = discord.utils.get(bot.get_all_channels(), id=payload.channel_id)
   message = await channel.fetch_message(payload.message_id)
-  receiver = message.author.id
-  if receiver == payload.user_id:
+  receiver = message.author
+  if receiver.id == payload.user_id:
     print("emoji from author")
   elif message.created_at.timestamp() >= (datetime.datetime.now().timestamp() - 300):
     print("message too old")
