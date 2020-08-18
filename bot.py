@@ -56,7 +56,7 @@ async def on_raw_reaction_add(payload):
   receiver = message.author
   msg_created = message.created_at.timestamp()
   current_time = datetime.datetime.now().timestamp()
-  time_limit = datetime.datetime.now().timestamp() - 300
+  time_limit = datetime.datetime.now().timestamp() - 10
   print(f"message created: {msg_created}")
   print(f"current time: {current_time}")
   print(f"time limit: {time_limit}")
@@ -82,7 +82,7 @@ async def on_raw_reaction_remove(payload):
   receiver = message.author
   msg_created = message.created_at.timestamp()
   current_time = datetime.datetime.now().timestamp()
-  time_limit = datetime.datetime.now().timestamp() - 300
+  time_limit = datetime.datetime.now().timestamp() - 10
   print(f"message created: {msg_created}")
   print(f"current time: {current_time}")
   print(f"time limit: {time_limit}")
