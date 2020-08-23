@@ -47,7 +47,9 @@ async def on_ready():
 @bot.event
 async def on_message(message):
   if message.id == MRPSTY_CHANNEL:
+    print("in mrps ty channel")
     if message.content != "ok":
+      print("this is not ok")
       await message.delete()
 
 @bot.event
