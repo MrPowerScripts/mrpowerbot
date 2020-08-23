@@ -27,17 +27,16 @@ class Monsters(commands.Cog):
     test_message = await game_channel.send("monster game initialized")
     print('Monster game ready!')
     
-    while True:
-      time.sleep(5)
-      await game_channel.send("starting game")
-      monster = random.choice(monster_mash)()
-      await game_channel.send(f"monster hp is: {monster.hp}")
-      monster.remove_hp(5)
-      await game_channel.send(f"monster hp is: {monster.hp}")
-      
-      new_time = random.randint(1, 3600)
-      await game_channel.send(f"new game in: {new_time}")
-      time.sleep(new_time)
+    time.sleep(5)
+    await game_channel.send("starting game")
+    monster = random.choice(monster_mash)()
+    await game_channel.send(f"monster hp is: {monster.hp}")
+    monster.remove_hp(5)
+    await game_channel.send(f"monster hp is: {monster.hp}")
+    
+    new_time = random.randint(1, 3600)
+    await game_channel.send(f"new game in: {new_time}")
+    # time.sleep(new_time)
 
   # @commands.Cog.listener()
   # async def on_message(self, message):
