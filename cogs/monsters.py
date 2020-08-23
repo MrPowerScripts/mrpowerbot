@@ -43,7 +43,7 @@ class Monsters(commands.Cog):
           self.monster_message.send(f"monster is ded")
 
   @tasks.loop(seconds=1.0)
-  def run_monster(self):
+  async def run_monster(self):
     game_channel = self.bot.get_channel(MED_CHANNEL)
     await game_channel.send("monster game initialized")
     print('Monster game ready!')
