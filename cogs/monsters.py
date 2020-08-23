@@ -1,14 +1,14 @@
 import random
 import discord
 import time
-from utils import TEST_CHANNEL, MRPSBOT_CHANNEL, prob
+from utils import TEST_CHANNEL, MRPSBOT_CHANNEL, MONSTERS_ROLE, prob
 from discord.ext import commands, tasks
 
 class Monster:
   def __init__(self):
     self.hp = random.randint(10, 20) + 1
     self.escape_time = int(time.time()) + 600
-    self.monster_says = "Rawr i'm a monster 〴⋋_⋌〵"
+    self.monster_says = f"Rawr i'm a <@&{MONSTERS_ROLE}> 〴⋋_⋌〵"
 
   def is_ded(self):
     return self.hp < 1
