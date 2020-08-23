@@ -35,9 +35,9 @@ class Monsters(commands.Cog):
       monster.remove_hp(5)
       game_channel.send(f"monster hp is: {monster.hp}")
       
-      time = random.randint(1, 3600)
-      game_channel.send(f"new gammme in: {time}")
-      time.sleep(time)
+      new_time = random.randint(1, 3600)
+      game_channel.send(f"new gammme in: {new_time}")
+      time.sleep(new_time)
 
   # @commands.Cog.listener()
   # async def on_message(self, message):
