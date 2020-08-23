@@ -46,8 +46,8 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
-  if message.id === MRPSTY_CHANNEL:
-    if message.content !== "ok":
+  if message.id == MRPSTY_CHANNEL:
+    if message.content != "ok":
       await message.delete()
 
 @bot.event
