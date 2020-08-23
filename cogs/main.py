@@ -17,8 +17,8 @@ from utils import (
 )
 
 class Main(commands.Cog):
-  def __init__(self, self.bot):
-    self.self.bot = self.bot
+  def __init__(self, bot):
+    self.bot = bot
 
   @commands.Cog.listener()
   async def on_ready(self):
