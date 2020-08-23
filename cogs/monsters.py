@@ -6,7 +6,7 @@ from discord.ext import commands
 
 class Monster:
   def __init__(self):
-    self.hp = random.randint(10, 20)
+    self.hp = random.randint(10, 20) + 1
 
   def is_ded(self):
     return self.hp < 1
@@ -39,7 +39,7 @@ class Monsters(commands.Cog):
         await game_channel.send("starting game")
         self.monster = random.choice(monster_mash)()
 
-        self.bot.add_reaction(self.monster_message, "⚡")
+        self.monster_message.add_reaction("⚡")
         
         while not self.monster.is_ded():
           await self.monster_message.send(f"monster hp is: {self.monster.hp}")
