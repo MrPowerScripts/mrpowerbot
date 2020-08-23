@@ -9,6 +9,7 @@ class Monster:
     self.hp = random.randint(10, 20)
 
   def remove_hp(self, amount)
+    self.hp = self.hp - amount
 
 class TestMonster(Monster):
   def __init__(self):
