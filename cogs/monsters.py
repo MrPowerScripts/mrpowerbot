@@ -2,7 +2,7 @@ import random
 import discord
 import time
 from utils import TEST_CHANNEL, MED_CHANNEL, prob
-from discord.ext import commands
+from discord.ext import commands, tasks
 
 class Monster:
   def __init__(self):
@@ -31,31 +31,8 @@ class Monsters(commands.Cog):
 
   @commands.Cog.listener()
   async def on_ready(self):
-    game_channel = self.bot.get_channel(MED_CHANNEL)
-    await game_channel.send("monster game initialized")
-    print('Monster game ready!')
-    
-    time.sleep(5)
+    print("monsters ready")
 
-    while True:
-      if prob(.05):
-        print("starting monster game")
-        # await game_channel.send("starting game")
-        self.monster = random.choice(monster_mash)()
-        self.monster_message = await game_channel.send(f"{self.monster.monster_says}| hp: {self.monster.hp}")
-        await self.monster_message.add_reaction("⚡")
-        
-        while True:
-          if int(time.time()) > self.monster.escape_time:
-            await self.monster_message.edit(content=f"{self.monster.monster_says}| hp: ESCAPED")
-            break
-          if not self.monster.is_ded():
-            await self.monster_message.edit(content=f"{self.monster.monster_says}| hp: {self.monster.hp}")
-          else:
-            await self.monster_message.edit(content=f"{self.monster.monster_says}| hp: ded")
-            break
-          time.sleep(1)
-      time.sleep(10)
   @commands.Cog.listener()
   async def on_raw_reaction_add(self, payload):
     if payload.message_id == self.monster_message.id:
@@ -64,6 +41,30 @@ class Monsters(commands.Cog):
           self.monster.remove_hp(1)
         else:
           self.monster_message.send(f"monster is ded")
+
+  @tasks.loop(seconds=1.0)
+  def run_monster(self)
+    game_channel = self.bot.get_channel(MED_CHANNEL)
+    await game_channel.send("monster game initialized")
+    print('Monster game ready!')
+    if prob(.05):
+      print("starting monster game")
+      # await game_channel.send("starting game")
+      self.monster = random.choice(monster_mash)()
+      self.monster_message = await game_channel.send(f"{self.monster.monster_says}| hp: {self.monster.hp}")
+      await self.monster_message.add_reaction("⚡")
+      
+      while True:
+        if int(time.time()) > self.monster.escape_time:
+          await self.monster_message.edit(content=f"{self.monster.monster_says}| hp: ESCAPED")
+          break
+        if not self.monster.is_ded():
+          await self.monster_message.edit(content=f"{self.monster.monster_says}| hp: {self.monster.hp}")
+        else:
+          await self.monster_message.edit(content=f"{self.monster.monster_says}| hp: ded")
+          break
+        time.sleep(1)
+    time.sleep(10)
 
 def setup(bot):
   bot.add_cog(Monsters(bot))
