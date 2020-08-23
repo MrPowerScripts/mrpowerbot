@@ -161,3 +161,6 @@ class Main(commands.Cog):
     message = '\n'.join(map(str, zaps))
 
     await ctx.message.channel.send(f"{message}")
+
+def setup(bot):
+  bot.add_cog(Main(bot))
