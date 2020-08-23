@@ -50,7 +50,7 @@ class Monsters(commands.Cog):
       time.sleep(1)
 
   @commands.Cog.listener()
-  async def on_raw_reaction_add(payload):
+  async def on_raw_reaction_add(self, payload):
     if payload.message_id == self.monster_message.id:
       if str(payload.emoji) == "⚡":
         if not self.monster.is_ded():
