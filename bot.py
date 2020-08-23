@@ -46,8 +46,8 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
-  print(message)
-  if message.id == MRPSTY_CHANNEL:
+  # print(message)
+  if message.channel.id == MRPSTY_CHANNEL:
     print("in mrps ty channel")
     if message.content != "ok":
       print("this is not ok")
