@@ -29,14 +29,14 @@ class Monsters(commands.Cog):
     
     while True:
       time.sleep(5)
-      game_channel.send("starting game")
+      await game_channel.send("starting game")
       monster = random.choice(monster_mash)()
-      game_channel.send(f"monster hp is: {monster.hp}")
+      await game_channel.send(f"monster hp is: {monster.hp}")
       monster.remove_hp(5)
-      game_channel.send(f"monster hp is: {monster.hp}")
+      await game_channel.send(f"monster hp is: {monster.hp}")
       
       new_time = random.randint(1, 3600)
-      game_channel.send(f"new game in: {new_time}")
+      await game_channel.send(f"new game in: {new_time}")
       time.sleep(new_time)
 
   # @commands.Cog.listener()
