@@ -40,14 +40,13 @@ class Monsters(commands.Cog):
       if prob(.10):
         await game_channel.send("starting game")
         self.monster = random.choice(monster_mash)()
-        self.monster_message = await game_channel.send(
-          f"{self.monster.monster_says}| hp: {self.monster.hp}")
+        self.monster_message = await game_channel.send(f"{self.monster.monster_says}| hp: {self.monster.hp}")
         await self.monster_message.add_reaction("⚡")
         
         while not self.monster.is_ded():
-          await self.monster_message.edit(content="f{self.monster.monster_says}| hp: {self.monster.hp}")
+          await self.monster_message.edit(content=f"{self.monster.monster_says}| hp: {self.monster.hp}")
           time.sleep(1)
-        await self.monster_message.edit(content="f{self.monster.monster_says}| hp: ded")
+        await self.monster_message.edit(content=f"{self.monster.monster_says}| hp: ded")
       time.sleep(1)
 
   @commands.Cog.listener()
