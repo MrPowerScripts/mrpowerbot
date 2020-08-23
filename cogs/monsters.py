@@ -17,7 +17,7 @@ class Monster:
 
 class TestMonster(Monster):
   def __init__(self):
-    super().__init__(monster_says)
+    super().__init__()
     self.hp = random.randint(1, 3)
 
 monster_mash = [Monster, TestMonster]
