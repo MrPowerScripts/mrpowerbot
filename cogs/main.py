@@ -20,7 +20,7 @@ class Main(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
 
-  @commands.Cog.Listener()
+  @commands.Cog.listener()
   async def on_ready():
 
     print(bot.guilds)
@@ -51,7 +51,7 @@ class Main(commands.Cog):
         print("this is not ok")
         await message.delete()
 
-  @commands.Cog.Listener()
+  @commands.Cog.listener()
   async def on_raw_reaction_add(payload):
     print(payload)
     channel = discord.utils.get(bot.get_all_channels(), id=payload.channel_id)
@@ -77,7 +77,7 @@ class Main(commands.Cog):
           db.zap(receiver)
           print("zapped!")
 
-  @commands.Cog.Listener()
+  @commands.Cog.listener()
   async def on_raw_reaction_remove(payload):
     print(payload)
     channel = discord.utils.get(bot.get_all_channels(), id=payload.channel_id)
