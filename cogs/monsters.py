@@ -13,7 +13,7 @@ class Monster:
 
 class TestMonster(Monster):
   def __init__(self):
-    self.hp = randomm.randint(1, 3)
+    self.hp = random.randint(1, 3)
 
 monster_mash = [Monster, TestMonster]
 
@@ -36,7 +36,7 @@ class Monsters(commands.Cog):
       game_channel.send(f"monster hp is: {monster.hp}")
       
       new_time = random.randint(1, 3600)
-      game_channel.send(f"new gammme in: {new_time}")
+      game_channel.send(f"new game in: {new_time}")
       time.sleep(new_time)
 
   # @commands.Cog.listener()
