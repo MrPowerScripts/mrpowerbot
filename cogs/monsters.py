@@ -26,6 +26,7 @@ monster_mash = [Monster, TestMonster]
 class Monsters(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
+    self.run_monsters.start()
     self.monster = None
     self.monster_message = None
 
@@ -43,9 +44,8 @@ class Monsters(commands.Cog):
           self.monster_message.send(f"monster is ded")
 
   @tasks.loop(seconds=1.0)
-  async def run_monster(self):
+  async def run_monsters(self):
     game_channel = self.bot.get_channel(MED_CHANNEL)
-    await game_channel.send("monster game initialized")
     print('Monster game ready!')
     if prob(.05):
       print("starting monster game")
