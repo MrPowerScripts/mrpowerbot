@@ -63,8 +63,6 @@ class Monsters(commands.Cog):
         else:
           await self.monster_message.edit(content=f"{self.monster.monster_says}| hp: ded")
           break
-        time.sleep(1)
-    time.sleep(10)
 
 def setup(bot):
   bot.add_cog(Monsters(bot))
