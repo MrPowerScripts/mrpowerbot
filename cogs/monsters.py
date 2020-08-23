@@ -47,7 +47,7 @@ class Monsters(commands.Cog):
   async def run_monsters(self):
     game_channel = self.bot.get_channel(MRPSBOT_CHANNEL)
     print('Monster game ready!')
-    if prob(.05):
+    if prob(.02):
       print("starting monster game")
       # await game_channel.send("starting game")
       self.monster = random.choice(monster_mash)()
