@@ -19,7 +19,7 @@ class Monsters(commands.Cog):
 
   @commands.Cog.listener()
   async def on_ready(self):
-    game_channel = discord.get_channel(TEST_CHANNEL)
+    game_channel = self.bot.get_channel(TEST_CHANNEL)
     game_channel.send("monster game initialized")
     print('Monster game ready!')
 
