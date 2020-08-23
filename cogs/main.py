@@ -17,33 +17,33 @@ from utils import (
 )
 
 class Main(commands.Cog):
-  def __init__(self, bot):
-    self.bot = bot
+  def __init__(self, self.bot):
+    self.self.bot = self.bot
 
   @commands.Cog.listener()
-  async def on_ready():
+  async def on_ready(self):
 
-    print(bot.guilds)
-    for guild in bot.guilds:
+    print(self.bot.guilds)
+    for guild in self.bot.guilds:
       if guild.id != MRPS_GUILD:
         print(f"leaving: {guild.name}")
         await guild.leave()
 
     print('Logged in as')
     db.preparedb()
-    log_channel = discord.utils.get(bot.get_all_channels(), id=LOG_CHANNEL)
-    await log_channel.send(f"HELLO WORLD! I'm MrPowerBot@{REVISION}")
+    log_channel = discord.utils.get(self.bot.get_all_channels(), id=LOG_CHANNEL)
+    await log_channel.send(f"HELLO WORLD! I'm MrPowerself.bot@{REVISION}")
     try:
       version = db.status_check()
       await log_channel.send(f"`I'm connected to Postgres! {version}`")
     except:
       await log_channel.send(f"Posrgres connection failed 😭😭😭")
-    print(bot.user.name)
-    print(bot.user.id)
+    print(self.bot.user.name)
+    print(self.bot.user.id)
     print('------')
 
-  @bot.event
-  async def on_message(message):
+  @commands.Cog.listener()
+  async def on_message(self, message):
     # print(message)
     if message.channel.id == MRPSTY_CHANNEL:
       print("in mrps ty channel")
@@ -52,9 +52,9 @@ class Main(commands.Cog):
         await message.delete()
 
   @commands.Cog.listener()
-  async def on_raw_reaction_add(payload):
+  async def on_raw_reaction_add(self, payload):
     print(payload)
-    channel = discord.utils.get(bot.get_all_channels(), id=payload.channel_id)
+    channel = discord.utils.get(self.bot.get_all_channels(), id=payload.channel_id)
     message = await channel.fetch_message(payload.message_id)
     receiver = message.author
     msg_created = message.created_at.timestamp()
@@ -78,9 +78,9 @@ class Main(commands.Cog):
           print("zapped!")
 
   @commands.Cog.listener()
-  async def on_raw_reaction_remove(payload):
+  async def on_raw_reaction_remove(self, payload):
     print(payload)
-    channel = discord.utils.get(bot.get_all_channels(), id=payload.channel_id)
+    channel = discord.utils.get(self.bot.get_all_channels(), id=payload.channel_id)
     message = await channel.fetch_message(payload.message_id)
     receiver = message.author
     msg_created = message.created_at.timestamp()
@@ -105,7 +105,7 @@ class Main(commands.Cog):
 
   @commands.command()
   @commands.has_role(MOD_ROLE)
-  async def streamer(ctx, user: discord.Member):
+  async def streamer(self, ctx, user: discord.Member):
     role = discord.utils.get(user.guild.roles, id=STREAMER_ROLE)
     try:
       if role in user.roles:
@@ -119,7 +119,7 @@ class Main(commands.Cog):
 
   @commands.command()
   @commands.has_role(MOD_ROLE)
-  async def roundtable(ctx, user: discord.Member):
+  async def roundtable(self, ctx, user: discord.Member):
     role = discord.utils.get(user.guild.roles, id=ROUNDTABLE_ROLE)
     try:
       if role in user.roles:
@@ -133,29 +133,29 @@ class Main(commands.Cog):
 
   @commands.command()
   @commands.has_role(MOD_ROLE)
-  async def reboot(ctx):
-    await ctx.channel.send(f"restarting bot")
+  async def reboot(self, ctx):
+    await ctx.channel.send(f"restarting self.bot")
     sys.exit()
 
   @commands.command()
-  async def add(ctx, left: int, right: int):
+  async def add(self, ctx, left: int, right: int):
     """Adds two numbers together."""
     await ctx.send(left + right)
 
   @commands.command()
-  async def register(ctx):
+  async def register(self, ctx):
     user_id = ctx.message.author.id
     print(f"registering {user_id}")
     db.register_user(user_id)
 
   @commands.command()
-  async def zaps(ctx):
+  async def zaps(self, ctx):
     print(f"zaps {ctx.message.author.name}")
     zaps = db.zaps(ctx.message.author.id)
     await ctx.message.channel.send(f"{ctx.message.author.name}: {str(zaps)}")
 
   @commands.command()
-  async def zapleaders(ctx):
+  async def zapleaders(self, ctx):
     zaps = db.zap_leaders()
     print(zaps)
     message = '\n'.join(map(str, zaps))
