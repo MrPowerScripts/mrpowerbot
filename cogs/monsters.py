@@ -1,7 +1,7 @@
 import random
 import discord
 import time
-from utils import TEST_CHANNEL, MED_CHANNEL, prob
+from utils import TEST_CHANNEL, MRPSBOT_CHANNEL, prob
 from discord.ext import commands, tasks
 
 class Monster:
@@ -45,7 +45,7 @@ class Monsters(commands.Cog):
 
   @tasks.loop(seconds=1.0)
   async def run_monsters(self):
-    game_channel = self.bot.get_channel(MED_CHANNEL)
+    game_channel = self.bot.get_channel(MRPSBOT_CHANNEL)
     print('Monster game ready!')
     if prob(.05):
       print("starting monster game")
