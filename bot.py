@@ -159,16 +159,9 @@ async def zapleaders(ctx):
 
   await ctx.message.channel.send(f"{message}")
 
-async def monsters():
-    await bot.wait_until_ready()
-    counter = 0
-    channel = discord.Object(id='')
-    while not bot.is_closed:
-        counter += 1
-        # await bot.send_message(channel, counter)
-        print(counter)
-        await asyncio.sleep(10) # task runs every 60 seconds
+initial_extensions = ['cogs.monsters']
 
-bot.loop.create_task(monsters())
+for extension in initial_extensions:
+    bot.load_extension(extension)
 
 bot.run(os.environ["BOT_TOKEN"])
