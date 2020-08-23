@@ -1,13 +1,14 @@
 import random
 import discord
 import time
-from utils import TEST_CHANNEL, prob
+from utils import TEST_CHANNEL, MED_CHANNEL, prob
 from discord.ext import commands
 
 class Monster:
   def __init__(self):
     self.hp = random.randint(10, 20) + 1
-    self.monster_says = "Rawr i'm a monster"
+    self.escape_time = int(time.time()) + 600
+    self.monster_says = "Rawr i'm a monster 〴⋋_⋌〵"
 
   def is_ded(self):
     return self.hp < 1
@@ -30,25 +31,31 @@ class Monsters(commands.Cog):
 
   @commands.Cog.listener()
   async def on_ready(self):
-    game_channel = self.bot.get_channel(TEST_CHANNEL)
+    game_channel = self.bot.get_channel(MED_CHANNEL)
     await game_channel.send("monster game initialized")
     print('Monster game ready!')
     
     time.sleep(5)
 
     while True:
-      if prob(.10):
-        await game_channel.send("starting game")
+      if prob(.05):
+        print("starting monster game")
+        # await game_channel.send("starting game")
         self.monster = random.choice(monster_mash)()
         self.monster_message = await game_channel.send(f"{self.monster.monster_says}| hp: {self.monster.hp}")
         await self.monster_message.add_reaction("⚡")
         
-        while not self.monster.is_ded():
-          await self.monster_message.edit(content=f"{self.monster.monster_says}| hp: {self.monster.hp}")
+        while True:
+          if int(time.time()) > self.monster.escape_time:
+            await self.monster_message.edit(content=f"{self.monster.monster_says}| hp: ESCAPED")
+            break
+          if not self.monster.is_ded():
+            await self.monster_message.edit(content=f"{self.monster.monster_says}| hp: {self.monster.hp}")
+          else:
+            await self.monster_message.edit(content=f"{self.monster.monster_says}| hp: ded")
+            break
           time.sleep(1)
-        await self.monster_message.edit(content=f"{self.monster.monster_says}| hp: ded")
-      time.sleep(1)
-
+      time.sleep(10)
   @commands.Cog.listener()
   async def on_raw_reaction_add(self, payload):
     if payload.message_id == self.monster_message.id:
