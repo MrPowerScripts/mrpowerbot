@@ -40,7 +40,7 @@ class Monsters(commands.Cog):
   @commands.has_role(MOD_ROLE)
   async def monprob(self, ctx, arg):
     if float(arg):
-      self.probability = arg
+      self.probability = float(arg)
       print(f"new probability: {self.probability}")
 
   def mm_formated(self):
