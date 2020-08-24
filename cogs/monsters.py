@@ -30,7 +30,7 @@ monster_mash = [Monster, MiniMonster]
 class Monsters(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
-    self.probability = 0.009
+    self.probability = 0.000009
     self.run_monsters.start()
     self.monster = None
     self.monster_meta = None
