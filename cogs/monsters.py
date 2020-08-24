@@ -7,8 +7,10 @@ from discord.ext import commands, tasks
 class Monster:
   def __init__(self):
     self.hp = random.randint(10, 20) + 1
+    self.name = "Monster"
+    self.image = "〴⋋_⋌〵"
+    self.status = "Rawr"
     self.escape_time = int(time.time()) + 600
-    self.monster_says = f"Rawr i'm a <@&{MONSTERS_ROLE}> 〴⋋_⋌〵"
 
   def is_ded(self):
     return self.hp < 1
@@ -16,19 +18,31 @@ class Monster:
   def remove_hp(self, amount):
     self.hp = self.hp - amount
 
-class TestMonster(Monster):
+class MiniMonster(Monster):
   def __init__(self):
     super().__init__()
+    self.name = "Mini Monster"
+    self.image = "〴⋋⋌〵"
     self.hp = random.randint(1, 3)
 
-monster_mash = [Monster, TestMonster]
+monster_mash = [Monster, MiniMonster]
 
 class Monsters(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
     self.run_monsters.start()
     self.monster = None
+    self.monster_meta = None
     self.monster_message = None
+
+  def mm_formated(self):
+    return f"""
+      <@&{MONSTERS_ROLE}> has arrived!
+      {self.monster.image}
+      Name: {self.monster.name}
+      HP: {self.monster.hp}
+      Status: {self.monster.status}
+      """[1:-1]
 
   @commands.Cog.listener()
   async def on_ready(self):
@@ -47,21 +61,23 @@ class Monsters(commands.Cog):
   async def run_monsters(self):
     game_channel = self.bot.get_channel(MRPSBOT_CHANNEL)
     print('Monster game ready!')
-    if prob(0.00009):
+    if prob(0.009):
       print("starting monster game")
       # await game_channel.send("starting game")
       self.monster = random.choice(monster_mash)()
-      self.monster_message = await game_channel.send(f"{self.monster.monster_says}| hp: {self.monster.hp}")
+      self.monster_message = await game_channel.send(mm_formated())
       await self.monster_message.add_reaction("⚡")
       
       while True:
         if int(time.time()) > self.monster.escape_time:
-          await self.monster_message.edit(content=f"{self.monster.monster_says}| hp: ESCAPED")
+          self.monster.status = "Escaped"
+          await self.monster_message.edit(content=mm_formated())
           break
         if not self.monster.is_ded():
-          await self.monster_message.edit(content=f"{self.monster.monster_says}| hp: {self.monster.hp}")
+          await self.monster_message.edit(content=mm_formated())
         else:
-          await self.monster_message.edit(content=f"{self.monster.monster_says}| hp: ded")
+          self.monster.status = "ded"
+          await self.monster_message.edit(content=mm_formated())
           break
     time.sleep(1)
 
