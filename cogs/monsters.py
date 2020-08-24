@@ -30,10 +30,18 @@ monster_mash = [Monster, MiniMonster]
 class Monsters(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
+    self.probability = 0.009
     self.run_monsters.start()
     self.monster = None
     self.monster_meta = None
     self.monster_message = None
+
+  @commands.command()
+  @commands.has_role(MOD_ROLE)
+  async def monprob(self, ctx, arg):
+    if float(arg):
+      self.probability = arg
+      print(f"new probability: {self.probability}")
 
   def mm_formated(self):
     return f"""
@@ -61,7 +69,7 @@ class Monsters(commands.Cog):
   async def run_monsters(self):
     game_channel = self.bot.get_channel(MRPSBOT_CHANNEL)
     print('Monster game ready!')
-    if prob(0.009):
+    if prob(self.probability):
       print("starting monster game")
       # await game_channel.send("starting game")
       self.monster = random.choice(monster_mash)()
