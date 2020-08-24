@@ -73,20 +73,20 @@ class Monsters(commands.Cog):
       print("starting monster game")
       # await game_channel.send("starting game")
       self.monster = random.choice(monster_mash)()
-      print(mm_formated())
-      self.monster_message = await game_channel.send(mm_formated())
+      print(self.mm_formated())
+      self.monster_message = await game_channel.send(self.mm_formated())
       await self.monster_message.add_reaction("⚡")
       
       while True:
         if int(time.time()) > self.monster.escape_time:
           self.monster.status = "Escaped"
-          await self.monster_message.edit(content=mm_formated())
+          await self.monster_message.edit(content=self.mm_formated())
           break
         if not self.monster.is_ded():
-          await self.monster_message.edit(content=mm_formated())
+          await self.monster_message.edit(content=self.mm_formated())
         else:
           self.monster.status = "ded"
-          await self.monster_message.edit(content=mm_formated())
+          await self.monster_message.edit(content=self.mm_formated())
           break
 
 def setup(bot):
