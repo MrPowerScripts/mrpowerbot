@@ -45,12 +45,12 @@ class Monsters(commands.Cog):
 
   def mm_formated(self):
     return f"""
-      <@&{MONSTERS_ROLE}> has arrived!
-      {self.monster.image}
-      Name: {self.monster.name}
-      HP: {self.monster.hp}
-      Status: {self.monster.status}
-      """[1:-1]
+    <@&{MONSTERS_ROLE}> has arrived!
+    {self.monster.image}
+    Name: {self.monster.name}
+    HP: {self.monster.hp}
+    Status: {self.monster.status}
+    """[1:-1]
 
   @commands.Cog.listener()
   async def on_ready(self):
