@@ -43,7 +43,7 @@ class Monsters(commands.Cog):
         else:
           self.monster_message.send(f"monster is ded")
 
-  @tasks.loop(seconds=1.0)
+  @tasks.loop(seconds=5.0)
   async def run_monsters(self):
     game_channel = self.bot.get_channel(MRPSBOT_CHANNEL)
     print('Monster game ready!')
