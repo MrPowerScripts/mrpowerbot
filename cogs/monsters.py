@@ -23,7 +23,7 @@ class MiniMonster(Monster):
     super().__init__()
     self.name = "Mini Monster"
     self.image = "〴⋋⋌〵"
-    self.hp = random.randint(1, 3)
+    self.hp = random.randint(2, 5)
 
 monster_mash = [Monster, MiniMonster]
 
