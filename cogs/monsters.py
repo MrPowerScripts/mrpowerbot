@@ -79,7 +79,6 @@ class Monsters(commands.Cog):
           self.monster.status = "ded"
           await self.monster_message.edit(content=mm_formated())
           break
-    time.sleep(1)
 
 def setup(bot):
   bot.add_cog(Monsters(bot))
