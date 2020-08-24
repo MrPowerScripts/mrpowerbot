@@ -1,7 +1,7 @@
 import random
 import discord
 import time
-from utils import TEST_CHANNEL, MRPSBOT_CHANNEL, MONSTERS_ROLE, prob
+from utils import TEST_CHANNEL, MRPSBOT_CHANNEL, MONSTERS_ROLE, MOD_ROLE, prob
 from discord.ext import commands, tasks
 
 class Monster:
