@@ -47,7 +47,7 @@ class Monsters(commands.Cog):
     self.run_monsters.start()
     self.monster = None
     self.monster_meta = {
-      attackers:[]
+      "attackers":[]
       }
     self.monster_message = None
 
