@@ -65,7 +65,7 @@ class Monsters(commands.Cog):
       `Name:` {self.monster.name}
       `HP:` {self.monster.hp}
       `Status:` {self.monster.status}
-      {f"Attackers: {Counter(self.monster_meta.attackers)}" if self.monster.is_ded() else  }
+      {f"Attackers: {Counter(self.monster_meta.attackers)}" if self.monster.battle_over() else  }
       """[1:-1]
 
   @commands.Cog.listener()
