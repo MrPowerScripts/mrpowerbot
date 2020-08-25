@@ -1,7 +1,10 @@
 import random
 import discord
 import time
-from utils import TEST_CHANNEL, MRPSBOT_CHANNEL, MONSTERS_ROLE, MOD_ROLE, prob
+from utils import (
+  TEST_CHANNEL, MRPSBOT_CHANNEL, MONSTERS_ROLE, 
+  MOD_ROLE, MRPOWERBOT, prob
+  )
 from discord.ext import commands, tasks
 from collections import Counter
 
@@ -76,11 +79,12 @@ class Monsters(commands.Cog):
   async def on_raw_reaction_add(self, payload):
     if payload.message_id == self.monster_message.id:
       if str(payload.emoji) == "⚡":
-        if not self.monster.battle_over():
-          self.monster_meta['attackers'].append(payload.member.name)
-          self.monster.remove_hp(1)
-        else:
-          self.monster_message.send(f"monster is ded")
+        if payload.user_id != MRPOWERBOT:
+          if not self.monster.battle_over():
+            self.monster_meta['attackers'].append(payload.member.name)
+            self.monster.remove_hp(1)
+          else:
+            self.monster_message.send(f"monster is ded")
 
   @tasks.loop(seconds=1.0)
   async def run_monsters(self):
