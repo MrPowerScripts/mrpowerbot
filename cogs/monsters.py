@@ -28,7 +28,7 @@ class Monster:
     else:
       return False
 
-  def battle_over(self)
+  def battle_over(self):
     return self.times_up() or self.is_ded()
 
 class MiniMonster(Monster):
