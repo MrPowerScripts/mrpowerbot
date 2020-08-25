@@ -76,7 +76,7 @@ class Monsters(commands.Cog):
   async def on_raw_reaction_add(self, payload):
     if payload.message_id == self.monster_message.id:
       if str(payload.emoji) == "⚡":
-        if not self.monster.is_ded():
+        if not self.monster.battle_over():
           self.monster_meta['attackers'].append(payload.member.name)
           self.monster.remove_hp(1)
         else:
