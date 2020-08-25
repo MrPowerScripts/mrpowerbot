@@ -65,7 +65,7 @@ class Monsters(commands.Cog):
       `Name:` {self.monster.name}
       `HP:` {self.monster.hp}
       `Status:` {self.monster.status}
-      {f"Attackers: {Counter(self.monster_meta.attackers)}" if self.monster.battle_over() else ""}
+      {f"Attackers: {str(Counter(self.monster_meta['attackers']))}" if self.monster.battle_over() else ""}
       """[1:-1]
 
   @commands.Cog.listener()
@@ -77,7 +77,7 @@ class Monsters(commands.Cog):
     if payload.message_id == self.monster_message.id:
       if str(payload.emoji) == "⚡":
         if not self.monster.is_ded():
-          self.monster_meta.attackers.append(payload.member.name)
+          self.monster_meta['attackers'].append(payload.member.name)
           self.monster.remove_hp(1)
         else:
           self.monster_message.send(f"monster is ded")
