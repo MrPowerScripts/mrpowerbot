@@ -31,9 +31,6 @@ class Monster:
     else:
       return False
 
-  def battle_over(self):
-    return self.times_up() or self.is_ded()
-
 class MiniMonster(Monster):
   def __init__(self):
     super().__init__()
@@ -49,9 +46,10 @@ class Monsters(commands.Cog):
     self.probability = 0.0009
     self.run_monsters.start()
     self.monster = None
-    self.monster_meta = {
+    self.monster_meta_reset = {
       "attackers":[]
       }
+    self.monster_meta = self.monster_meta_reset
     self.monster_message = None
 
   @commands.command()
@@ -68,9 +66,15 @@ class Monsters(commands.Cog):
       `Name:` {self.monster.name}
       `HP:` {self.monster.hp}
       `Status:` {self.monster.status}
-      {f"`Attackers:` {Counter(self.monster_meta['attackers'])}" if self.monster.battle_over() else ""}
+      {f"`Attackers:` {Counter(self.monster_meta['attackers'])}" if self.battle_over() else ""}
       """[1:-1]
 
+  def battle_over(self):
+    return self.monster.times_up() or self.monster.is_ded():
+
+  def end_battle(self):
+    self.monster_meta = self.monster_meta_reset
+  
   @commands.Cog.listener()
   async def on_ready(self):
     print("monsters ready")
@@ -80,11 +84,11 @@ class Monsters(commands.Cog):
     if payload.message_id == self.monster_message.id:
       if str(payload.emoji) == "⚡":
         if payload.user_id != MRPOWERBOT:
-          if not self.monster.battle_over():
+          if not self.battle_over():
             self.monster_meta['attackers'].append(payload.member.name)
             self.monster.remove_hp(1)
           else:
-            self.monster_message.send(f"monster is ded")
+            self.end_battle()
 
   @tasks.loop(seconds=1.0)
   async def run_monsters(self):
