@@ -3,6 +3,7 @@ import discord
 import time
 from utils import TEST_CHANNEL, MRPSBOT_CHANNEL, MONSTERS_ROLE, MOD_ROLE, prob
 from discord.ext import commands, tasks
+from collections import Counter
 
 class Monster:
   def __init__(self):
@@ -17,6 +18,18 @@ class Monster:
 
   def remove_hp(self, amount):
     self.hp = self.hp - amount
+    if self.hp < 1:
+      self.status = 'ded'
+
+  def times_up(self):
+    if int(time.time()) > self.escape_time:
+      self.status = "escaped"
+      return True
+    else:
+      return False
+
+  def battle_over(self)
+    return self.times_up() or self.is_ded()
 
 class MiniMonster(Monster):
   def __init__(self):
@@ -33,7 +46,9 @@ class Monsters(commands.Cog):
     self.probability = 0.0009
     self.run_monsters.start()
     self.monster = None
-    self.monster_meta = None
+    self.monster_meta = {
+      attackers:[]
+      }
     self.monster_message = None
 
   @commands.command()
@@ -45,12 +60,13 @@ class Monsters(commands.Cog):
 
   def mm_formated(self):
     return f"""
-    <@&{MONSTERS_ROLE}> has arrived!
-    {self.monster.image}
-    Name: {self.monster.name}
-    HP: {self.monster.hp}
-    Status: {self.monster.status}
-    """[1:-1]
+      <@&{MONSTERS_ROLE}> has arrived!
+      {self.monster.image}
+      `Name:` {self.monster.name}
+      `HP:` {self.monster.hp}
+      `Status:` {self.monster.status}
+      {f"Attackers: {Counter(self.monster_meta.attackers)}" if self.monster.is_ded() else  }
+      """[1:-1]
 
   @commands.Cog.listener()
   async def on_ready(self):
@@ -61,6 +77,7 @@ class Monsters(commands.Cog):
     if payload.message_id == self.monster_message.id:
       if str(payload.emoji) == "⚡":
         if not self.monster.is_ded():
+          self.monster_meta.attackers.append(payload.member.name)
           self.monster.remove_hp(1)
         else:
           self.monster_message.send(f"monster is ded")
@@ -78,14 +95,12 @@ class Monsters(commands.Cog):
       await self.monster_message.add_reaction("⚡")
       
       while True:
-        if int(time.time()) > self.monster.escape_time:
-          self.monster.status = "Escaped"
+        if self.monster.times_up():
           await self.monster_message.edit(content=self.mm_formated())
           break
         if not self.monster.is_ded():
           await self.monster_message.edit(content=self.mm_formated())
         else:
-          self.monster.status = "ded"
           await self.monster_message.edit(content=self.mm_formated())
           break
 
