@@ -84,10 +84,9 @@ class Monsters(commands.Cog):
     if payload.message_id == self.monster_message.id:
       if str(payload.emoji) == "⚡":
         if payload.user_id != MRPOWERBOT:
-          if not self.battle_over():
-            self.monster_meta['attackers'].append(payload.member.name)
-            self.monster.remove_hp(1)
-          else:
+          self.monster.remove_hp(1)
+          self.monster_meta['attackers'].append(payload.member.name)
+          if self.battle_over():
             self.end_battle()
 
   @tasks.loop(seconds=1.0)
