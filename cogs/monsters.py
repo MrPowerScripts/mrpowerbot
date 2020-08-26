@@ -73,7 +73,10 @@ class Monsters(commands.Cog):
     return self.monster.times_up() or self.monster.is_ded()
 
   def end_battle(self):
+    print(self.monster_meta)
+    print(self.monster_meta_reset)
     self.monster_meta = self.monster_meta_reset
+    print(self.monster_meta)
   
   @commands.Cog.listener()
   async def on_ready(self):
