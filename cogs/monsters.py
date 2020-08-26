@@ -46,6 +46,7 @@ class Monsters(commands.Cog):
     self.probability = 0.0009
     self.run_monsters.start()
     self.monster = None
+    self.battling = False
     self.monster_attackers = []
 
     self.monster_message = None
@@ -74,8 +75,15 @@ class Monsters(commands.Cog):
     else:
       return False
 
-  def end_battle(self):
+  def start_battle(self):
+    self.monster = random.choice(monster_mash)()
     self.monster_attackers = []
+    self.battling = True
+
+  async def end_battle(self):
+    # final update before reset
+    self.battling = False
+    await self.monster_message.edit(content=self.mm_formated())
   
   @commands.Cog.listener()
   async def on_ready(self):
@@ -99,7 +107,7 @@ class Monsters(commands.Cog):
     if prob(self.probability):
       print("starting monster game")
       # await game_channel.send("starting game")
-      self.monster = random.choice(monster_mash)()
+      self.start_battle()
       print(self.mm_formated())
       self.monster_message = await game_channel.send(self.mm_formated())
       await self.monster_message.add_reaction("⚡")
@@ -111,7 +119,6 @@ class Monsters(commands.Cog):
         if not self.monster.is_ded():
           await self.monster_message.edit(content=self.mm_formated())
         else:
-          print(self.monster_attackers)
           await self.monster_message.edit(content=self.mm_formated())
           break
 
