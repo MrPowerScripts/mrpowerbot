@@ -77,11 +77,7 @@ class Monsters(commands.Cog):
       return False
 
   def end_battle(self):
-    print(self.monster_meta)
-    print(self.monster_meta_reset)
-    del self.monster_meta 
-    self.monster_meta = self.monster_meta_reset
-    print(self.monster_meta)
+    self.monster_meta['attackers'] = []
   
   @commands.Cog.listener()
   async def on_ready(self):
