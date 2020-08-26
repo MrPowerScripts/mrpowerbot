@@ -88,6 +88,7 @@ class Monsters(commands.Cog):
         if payload.user_id != MRPOWERBOT:
           self.monster.remove_hp(1)
           self.monster_attackers.append(payload.member.name)
+          print(self.monster_attackers)
           if self.battle_over():
             self.end_battle()
 
