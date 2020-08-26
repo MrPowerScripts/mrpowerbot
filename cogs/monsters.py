@@ -46,10 +46,7 @@ class Monsters(commands.Cog):
     self.probability = 0.0009
     self.run_monsters.start()
     self.monster = None
-    self.monster_meta_reset = {
-      "attackers":[]
-      }
-    self.monster_meta = self.monster_meta_reset
+    self.monster_attackers = []
     self.monster_message = None
 
   @commands.command()
@@ -66,7 +63,7 @@ class Monsters(commands.Cog):
       `Name:` {self.monster.name}
       `HP:` {self.monster.hp}
       `Status:` {self.monster.status}
-      {f"`Attackers:` {Counter(self.monster_meta['attackers'])}" if self.battle_over() else ""}
+      {f"`Attackers:` {Counter(self.monster_attackers)}" if self.battle_over() else ""}
       """[1:-1]
 
   def battle_over(self):
@@ -77,7 +74,7 @@ class Monsters(commands.Cog):
       return False
 
   def end_battle(self):
-    self.monster_meta['attackers'] = []
+    self.monster_attackers = []
   
   @commands.Cog.listener()
   async def on_ready(self):
@@ -89,7 +86,7 @@ class Monsters(commands.Cog):
       if str(payload.emoji) == "⚡":
         if payload.user_id != MRPOWERBOT:
           self.monster.remove_hp(1)
-          self.monster_meta['attackers'].append(payload.member.name)
+          self.monster_attackers.append(payload.member.name)
           if self.battle_over():
             self.end_battle()
 
@@ -102,7 +99,6 @@ class Monsters(commands.Cog):
       # await game_channel.send("starting game")
       self.monster = random.choice(monster_mash)()
       print(self.mm_formated())
-      self.monster_meta = self.monster_meta_reset
       self.monster_message = await game_channel.send(self.mm_formated())
       await self.monster_message.add_reaction("⚡")
       
