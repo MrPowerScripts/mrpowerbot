@@ -70,8 +70,11 @@ class Monsters(commands.Cog):
       """[1:-1]
 
   def battle_over(self):
-    print("the battle is over")
-    return self.monster.times_up() or self.monster.is_ded()
+    if self.monster.times_up() or self.monster.is_ded():
+      print("the battle is over")
+      return True
+    else:
+      return False
 
   def end_battle(self):
     print(self.monster_meta)
