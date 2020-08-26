@@ -76,7 +76,9 @@ class Monsters(commands.Cog):
 
   def end_battle(self):
     self.battling = False
+    await self.monster_message.edit(content=self.mm_formated())
     self.monster_attackers = []
+
   
   @commands.Cog.listener()
   async def on_ready(self):
