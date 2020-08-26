@@ -76,7 +76,6 @@ class Monsters(commands.Cog):
 
   def end_battle(self):
     self.battling = False
-    await self.monster_message.edit(content=self.mm_formated())
     self.monster_attackers = []
 
   
@@ -109,6 +108,6 @@ class Monsters(commands.Cog):
       
       while self.battling:
         await self.monster_message.edit(content=self.mm_formated())
-
+      await self.monster_message.edit(content=self.mm_formated())
 def setup(bot):
   bot.add_cog(Monsters(bot))
