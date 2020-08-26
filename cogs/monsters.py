@@ -44,10 +44,10 @@ class Monsters(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
     self.probability = 0.0009
-    self.battling = False
     self.run_monsters.start()
     self.monster = None
     self.monster_attackers = []
+
     self.monster_message = None
 
   @commands.command()
@@ -75,9 +75,7 @@ class Monsters(commands.Cog):
       return False
 
   def end_battle(self):
-    self.battling = False
     self.monster_attackers = []
-
   
   @commands.Cog.listener()
   async def on_ready(self):
@@ -100,14 +98,21 @@ class Monsters(commands.Cog):
     if prob(self.probability):
       print("starting monster game")
       # await game_channel.send("starting game")
-      self.battling = True
       self.monster = random.choice(monster_mash)()
       print(self.mm_formated())
       self.monster_message = await game_channel.send(self.mm_formated())
       await self.monster_message.add_reaction("⚡")
       
-      while self.battling:
-        await self.monster_message.edit(content=self.mm_formated())
-      await self.monster_message.edit(content=self.mm_formated())
+      while True:
+        if self.monster.times_up():
+          await self.monster_message.edit(content=self.mm_formated())
+          break
+        if not self.monster.is_ded():
+          await self.monster_message.edit(content=self.mm_formated())
+        else:
+          print(self.monster_attackers)
+          await self.monster_message.edit(content=self.mm_formated())
+          break
+
 def setup(bot):
   bot.add_cog(Monsters(bot))
