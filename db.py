@@ -14,7 +14,8 @@ def preparedb():
         id serial,
         discord_id bigint UNIQUE,
         username text,
-        zaps bigint
+        zaps bigint,
+        mondata jsonb DEFAULT "{}"
       );
     """)
     conn.commit()

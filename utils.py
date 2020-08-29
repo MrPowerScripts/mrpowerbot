@@ -25,7 +25,7 @@ REVISION = dyno_data.get("release").get("commit")[0:7]
 
 def prob(probability):
   rando = random.random()
-  print("prob: " + str(probability) + " rolled: " + str(rando))
+  #print("prob: " + str(probability) + " rolled: " + str(rando))
   return rando < probability
 
 
