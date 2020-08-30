@@ -77,11 +77,13 @@ class Monsters(commands.Cog):
       return False
 
   async def start_battle(self):
+    print("starting monster game")
     self.monster = random.choice(monster_mash)()
     self.monster_attackers = []
     self.monster_message = await game_channel.send(self.mm_formated())
     await self.monster_message.add_reaction("⚡")
     self.battling = True
+    print(self.mm_formated())
 
   async def end_battle(self):
     # final update before reset
@@ -111,10 +113,8 @@ class Monsters(commands.Cog):
     if prob(self.probability):
       print("HIT - should we play?")
       if int(time.time()) > (self.last_run + self.respawn_limit):
-        print("starting monster game")
         # await game_channel.send("starting game")
         await self.start_battle()
-        print(self.mm_formated())
       else:
         print(f"Too Soon... last run: {self.last_run}, current: {time.time()}")
       
