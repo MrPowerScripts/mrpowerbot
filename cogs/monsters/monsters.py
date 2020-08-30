@@ -39,7 +39,6 @@ class MiniMonster(Monster):
     self.hp = random.randint(2, 5)
 
 monster_mash = [Monster, MiniMonster]
-game_channel = self.bot.get_channel(MRPSBOT_CHANNEL)
 
 class Monsters(commands.Cog):
   def __init__(self, bot):
@@ -52,6 +51,7 @@ class Monsters(commands.Cog):
     self.battling = False
     self.monster_attackers = []
     self.monster_message = None
+    self.game_channel = None
 
   @commands.command()
   @commands.has_role(MOD_ROLE)
@@ -81,7 +81,7 @@ class Monsters(commands.Cog):
     print("starting monster game")
     self.monster = random.choice(monster_mash)()
     self.monster_attackers = []
-    message =  await game_channel.send(self.mm_formated())
+    message =  await self.game_channel.send(self.mm_formated())
     self.monster_message = message
     print(message)
     await self.monster_message.add_reaction("⚡")
@@ -96,6 +96,7 @@ class Monsters(commands.Cog):
   
   @commands.Cog.listener()
   async def on_ready(self):
+    self.game_channel = self.bot.get_channel(MRPSBOT_CHANNEL)
     print("monsters ready")
 
   @commands.Cog.listener()
@@ -115,7 +116,6 @@ class Monsters(commands.Cog):
     if prob(self.probability):
       print("HIT - should we play?")
       if int(time.time()) > (self.last_run + self.respawn_limit):
-        # await game_channel.send("starting game")
         await self.start_battle()
       else:
         print(f"Too Soon... last run: {self.last_run}, current: {time.time()}")
