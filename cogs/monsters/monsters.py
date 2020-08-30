@@ -113,7 +113,7 @@ class Monsters(commands.Cog):
       if int(time.time()) > (self.last_run + self.respawn_limit):
         print("starting monster game")
         # await game_channel.send("starting game")
-        self.start_battle()
+        await self.start_battle()
         print(self.mm_formated())
       else:
         print(f"Too Soon... last run: {self.last_run}, current: {time.time()}")
