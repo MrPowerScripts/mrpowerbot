@@ -39,6 +39,7 @@ class MiniMonster(Monster):
     self.hp = random.randint(2, 5)
 
 monster_mash = [Monster, MiniMonster]
+game_channel = self.bot.get_channel(MRPSBOT_CHANNEL)
 
 class Monsters(commands.Cog):
   def __init__(self, bot):
@@ -111,7 +112,6 @@ class Monsters(commands.Cog):
 
   @tasks.loop(seconds=1.0)
   async def run_monsters(self):
-    game_channel = self.bot.get_channel(MRPSBOT_CHANNEL)
     if prob(self.probability):
       print("HIT - should we play?")
       if int(time.time()) > (self.last_run + self.respawn_limit):
