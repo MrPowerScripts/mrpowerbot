@@ -44,7 +44,7 @@ class Monsters(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
     self.probability = 0.0001
-    self.last_run = None
+    self.last_run = 0
     self.respawn_limit = 86400
     self.run_monsters.start()
     self.monster = None
