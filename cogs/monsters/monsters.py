@@ -80,7 +80,9 @@ class Monsters(commands.Cog):
     print("starting monster game")
     self.monster = random.choice(monster_mash)()
     self.monster_attackers = []
-    self.monster_message = await game_channel.send(self.mm_formated())
+    message =  await game_channel.send(self.mm_formated())
+    self.monster_message = message
+    print(message)
     await self.monster_message.add_reaction("⚡")
     self.battling = True
     print(self.mm_formated())
