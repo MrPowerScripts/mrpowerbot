@@ -50,7 +50,6 @@ class Monsters(commands.Cog):
     self.monster = None
     self.battling = False
     self.monster_attackers = []
-
     self.monster_message = None
 
   @commands.command()
@@ -77,9 +76,11 @@ class Monsters(commands.Cog):
     else:
       return False
 
-  def start_battle(self):
+  async def start_battle(self):
     self.monster = random.choice(monster_mash)()
     self.monster_attackers = []
+    self.monster_message = await game_channel.send(self.mm_formated())
+    await self.monster_message.add_reaction("⚡")
     self.battling = True
 
   async def end_battle(self):
@@ -94,14 +95,15 @@ class Monsters(commands.Cog):
 
   @commands.Cog.listener()
   async def on_raw_reaction_add(self, payload):
-    if payload.message_id == self.monster_message.id:
-      if str(payload.emoji) == "⚡":
-        if payload.user_id != MRPOWERBOT:
-          self.monster.remove_hp(1)
-          self.monster_attackers.append(payload.member.name)
-          print(self.monster_attackers)
-          if self.battle_over():
-            self.end_battle()
+    if self.battling:
+      if payload.message_id == self.monster_message.id:
+        if str(payload.emoji) == "⚡":
+          if payload.user_id != MRPOWERBOT:
+            self.monster.remove_hp(1)
+            self.monster_attackers.append(payload.member.name)
+            print(self.monster_attackers)
+            if self.battle_over():
+              self.end_battle()
 
   @tasks.loop(seconds=1.0)
   async def run_monsters(self):
@@ -113,8 +115,6 @@ class Monsters(commands.Cog):
         # await game_channel.send("starting game")
         self.start_battle()
         print(self.mm_formated())
-        self.monster_message = await game_channel.send(self.mm_formated())
-        await self.monster_message.add_reaction("⚡")
       else:
         print(f"Too Soon... last run: {self.last_run}, current: {time.time()}")
       
