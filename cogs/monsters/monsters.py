@@ -83,7 +83,7 @@ class Monsters(commands.Cog):
   async def start_battle(self):
     print("starting monster game")
     self.monster = random.choice(monster_mash)()
-    self.monster_attackers = []
+    self.monster_attackers.clear()
     message =  await self.game_channel.send(self.mm_formated())
     self.monster_message = message
     print(message)
@@ -96,7 +96,6 @@ class Monsters(commands.Cog):
     self.battling = False
     self.last_run = int(time.time())
     await self.monster_message.edit(content=self.mm_formated())
-    self.monster_attackers.clear()
   
   @commands.Cog.listener()
   async def on_ready(self):
