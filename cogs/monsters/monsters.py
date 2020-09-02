@@ -108,7 +108,7 @@ class Monsters(commands.Cog):
         if str(payload.emoji) == "⚡":
           if payload.user_id != MRPOWERBOT:
             self.monster.remove_hp(1)
-            self.monster_attackers[payload.member.id]" += 1
+            self.monster_attackers[payload.member.id] += 1
             print(self.monster_attackers)
             if self.battle_over():
               self.end_battle()
