@@ -70,7 +70,7 @@ class Monsters(commands.Cog):
       `Name:` {self.monster.name}
       `HP:` {self.monster.hp}
       `Status:` {self.monster.status}
-      {f"`Attackers:` {list(map(lambda m: wtf(m), self.monster_attackers))}" if self.battle_over() else ""}
+      {f"`Attackers:` {list(map(lambda m: self.wtf(m), self.monster_attackers))}" if self.battle_over() else ""}
       """[1:-1]
 
   def battle_over(self):
