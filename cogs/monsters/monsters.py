@@ -49,7 +49,7 @@ class Monsters(commands.Cog):
     self.run_monsters.start()
     self.monster = None
     self.battling = False
-    self.monster_attackers = []
+    self.monster_attackers = Counter()
     self.monster_message = None
     self.game_channel = None
 
@@ -59,6 +59,7 @@ class Monsters(commands.Cog):
     if float(arg):
       self.probability = float(arg)
       print(f"new probability: {self.probability}")
+      
 
   def mm_formated(self):
     return f"""
@@ -67,7 +68,7 @@ class Monsters(commands.Cog):
       `Name:` {self.monster.name}
       `HP:` {self.monster.hp}
       `Status:` {self.monster.status}
-      {f"`Attackers:` {Counter(self.monster_attackers)}" if self.battle_over() else ""}
+      {f"`Attackers:` {dict(self.monster_attackers)}" if self.battle_over() else ""}
       """[1:-1]
 
   def battle_over(self):
@@ -106,7 +107,7 @@ class Monsters(commands.Cog):
         if str(payload.emoji) == "⚡":
           if payload.user_id != MRPOWERBOT:
             self.monster.remove_hp(1)
-            self.monster_attackers.append(payload.member.name)
+            self.monster_attackers[payload.member] += 1
             print(self.monster_attackers)
             if self.battle_over():
               self.end_battle()
