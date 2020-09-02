@@ -68,7 +68,7 @@ class Monsters(commands.Cog):
       `Name:` {self.monster.name}
       `HP:` {self.monster.hp}
       `Status:` {self.monster.status}
-      {f"`Attackers:` {dict(self.monster_attackers)}" if self.battle_over() else ""}
+      {f"`Attackers:` {list(map(lambda m: f"<@{m}>: {self.monster_attackers[m]}", self.monster_attackers))}" if self.battle_over() else ""}
       """[1:-1]
 
   def battle_over(self):
@@ -108,7 +108,7 @@ class Monsters(commands.Cog):
         if str(payload.emoji) == "⚡":
           if payload.user_id != MRPOWERBOT:
             self.monster.remove_hp(1)
-            self.monster_attackers[payload.member] += 1
+            self.monster_attackers[f"{payload.member.id}]" += 1
             print(self.monster_attackers)
             if self.battle_over():
               self.end_battle()
