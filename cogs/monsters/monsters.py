@@ -11,6 +11,7 @@ from collections import Counter
 class Monster:
   def __init__(self):
     self.hp = random.randint(10, 20) + 1
+    self.max_hp = self.hp
     self.name = "Monster"
     self.image = "〴⋋_⋌〵"
     self.status = "Rawr"
@@ -64,12 +65,14 @@ class Monsters(commands.Cog):
     return f"<@{wtf}>: {self.monster_attackers[wtf]}"
 
   def mm_formated(self):
-    attackers = list(map(lambda m: self.wtf(m), self.monster_attackers))
+
+    if self.battle_over():
+      attackers = list(map(lambda m: self.wtf(m), self.monster_attackers))
     return f"""
       <@&{MONSTERS_ROLE}> has arrived!
       {self.monster.image}
       `Name:` {self.monster.name}
-      `HP:` {self.monster.hp}
+      `HP:` {self.monster.hp}/{self.max_hp}
       `Status:` {self.monster.status}
       {f"`Attackers:` {attackers}" if self.battle_over() else ""}
       """[1:-1]
