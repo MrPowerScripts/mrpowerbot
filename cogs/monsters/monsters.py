@@ -60,7 +60,7 @@ class Monsters(commands.Cog):
       self.probability = float(arg)
       print(f"new probability: {self.probability}")
       
-  def wtf(wtf):
+  def wtf(self, wtf):
     return f"<@{wtf}>: {self.monster_attackers[wtf]}"
 
   def mm_formated(self):
