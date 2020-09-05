@@ -34,11 +34,13 @@ class Monster:
       return False
 
 class MiniMonster(Monster):
+  hp = random.randint(2, 5)
   def __init__(self):
     super().__init__()
     self.name = "Mini Monster"
     self.image = "〴⋋⋌〵"
-    self.hp = random.randint(2, 5)
+    self.hp = hp
+    self.max_hp = hp
 
 monster_mash = [Monster, MiniMonster]
 
