@@ -91,7 +91,11 @@ class Monsters(commands.Cog):
 
   async def start_battle(self):
     print("starting monster game")
-    self.monster = random.choice(monster_mash)()
+    try:
+      self.monster = random.choice(monster_mash)()
+    except Exception as e:
+      print(e)
+    print("monster created.")
     self.monster_attackers.clear()
     print("monster attackers cleared, and instanced")
     message = await self.game_channel.send(self.mm_formated())
