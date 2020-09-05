@@ -75,7 +75,7 @@ class Monsters(commands.Cog):
         <@&{MONSTERS_ROLE}> has arrived!
         {self.monster.image}
         `Name:` {self.monster.name}
-        `HP:` {self.monster.hp}/{self.max_hp}
+        `HP:` {self.monster.hp}/{self.monster.max_hp}
         `Status:` {self.monster.status}
         {f"`Attackers:` {attackers}" if battle_over else ""}
         """[1:-1]
