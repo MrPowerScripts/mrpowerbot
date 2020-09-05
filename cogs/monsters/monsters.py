@@ -9,9 +9,10 @@ from discord.ext import commands, tasks
 from collections import Counter
 
 class Monster:
+  hp = random.randint(10, 20) + 1
   def __init__(self):
-    self.hp = random.randint(10, 20) + 1
-    self.max_hp = self.hp
+    self.hp = hp
+    self.max_hp = hp
     self.name = "Monster"
     self.image = "〴⋋_⋌〵"
     self.status = "Rawr"
