@@ -68,8 +68,10 @@ class Monsters(commands.Cog):
     return f"<@{wtf}>: {self.monster_attackers[wtf]}"
 
   def mm_formated(self):
-
-    if self.battle_over():
+    print("updaing monster message")
+    battle_over = self.battle_over()
+    if battle_over:
+      print("battle is over")
       attackers = list(map(lambda m: self.wtf(m), self.monster_attackers))
     return f"""
       <@&{MONSTERS_ROLE}> has arrived!
@@ -77,7 +79,7 @@ class Monsters(commands.Cog):
       `Name:` {self.monster.name}
       `HP:` {self.monster.hp}/{self.max_hp}
       `Status:` {self.monster.status}
-      {f"`Attackers:` {attackers}" if self.battle_over() else ""}
+      {f"`Attackers:` {attackers}" if battle_over else ""}
       """[1:-1]
 
   def battle_over(self):
@@ -91,7 +93,9 @@ class Monsters(commands.Cog):
     print("starting monster game")
     self.monster = random.choice(monster_mash)()
     self.monster_attackers.clear()
-    message =  await self.game_channel.send(self.mm_formated())
+    print("monster attackers cleared, and instanced")
+    message = await self.game_channel.send(self.mm_formated())
+    print('monster messaged created')
     self.monster_message = message
     print(message)
     await self.monster_message.add_reaction("⚡")
