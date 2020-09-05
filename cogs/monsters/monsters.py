@@ -9,10 +9,9 @@ from discord.ext import commands, tasks
 from collections import Counter
 
 class Monster:
-  hp = random.randint(10, 20) + 1
   def __init__(self, hp):
-    self.hp = hp
-    self.max_hp = hp
+    self.hp = random.randint(10, 20) + 1
+    self.max_hp = 0
     self.name = "Monster"
     self.image = "〴⋋_⋌〵"
     self.status = "Rawr"
@@ -34,13 +33,11 @@ class Monster:
       return False
 
 class MiniMonster(Monster):
-  hp = random.randint(2, 5)
   def __init__(self, hp):
     super().__init__()
     self.name = "Mini Monster"
     self.image = "〴⋋⋌〵"
-    self.hp = hp
-    self.max_hp = hp
+    self.hp = random.randint(2, 5)
 
 monster_mash = [Monster, MiniMonster]
 
@@ -93,6 +90,7 @@ class Monsters(commands.Cog):
     print("starting monster game")
     try:
       self.monster = random.choice(monster_mash)()
+      self.monster.max_hp = self.monster.hp
     except Exception as e:
       print(e)
     print("monster created.")
