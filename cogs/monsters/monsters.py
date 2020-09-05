@@ -67,18 +67,21 @@ class Monsters(commands.Cog):
   def mm_formated(self):
     print("updaing monster message")
     battle_over = self.battle_over()
-    if battle_over:
-      print("battle is over")
-      attackers = list(map(lambda m: self.wtf(m), self.monster_attackers))
-    return f"""
-      <@&{MONSTERS_ROLE}> has arrived!
-      {self.monster.image}
-      `Name:` {self.monster.name}
-      `HP:` {self.monster.hp}/{self.max_hp}
-      `Status:` {self.monster.status}
-      {f"`Attackers:` {attackers}" if battle_over else ""}
-      """[1:-1]
-
+    try:
+      if battle_over:
+        print("battle is over")
+        attackers = list(map(lambda m: self.wtf(m), self.monster_attackers))
+      return f"""
+        <@&{MONSTERS_ROLE}> has arrived!
+        {self.monster.image}
+        `Name:` {self.monster.name}
+        `HP:` {self.monster.hp}/{self.max_hp}
+        `Status:` {self.monster.status}
+        {f"`Attackers:` {attackers}" if battle_over else ""}
+        """[1:-1]
+    except Exception as e:
+      print(e)
+  
   def battle_over(self):
     if self.monster.times_up() or self.monster.is_ded():
       print("the battle is over")
@@ -95,7 +98,7 @@ class Monsters(commands.Cog):
       print(e)
     print("monster created.")
     self.monster_attackers.clear()
-    print("monster attackers cleared, and instanced")
+    print("monster attackers cleared")
     message = await self.game_channel.send(self.mm_formated())
     print('monster messaged created')
     self.monster_message = message
