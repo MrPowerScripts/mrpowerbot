@@ -10,7 +10,7 @@ from collections import Counter
 
 class Monster:
   hp = random.randint(10, 20) + 1
-  def __init__(self):
+  def __init__(self, hp):
     self.hp = hp
     self.max_hp = hp
     self.name = "Monster"
@@ -35,7 +35,7 @@ class Monster:
 
 class MiniMonster(Monster):
   hp = random.randint(2, 5)
-  def __init__(self):
+  def __init__(self, hp):
     super().__init__()
     self.name = "Mini Monster"
     self.image = "〴⋋⋌〵"
