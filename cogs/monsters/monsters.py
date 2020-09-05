@@ -9,7 +9,7 @@ from discord.ext import commands, tasks
 from collections import Counter
 
 class Monster:
-  def __init__(self, hp):
+  def __init__(self):
     self.hp = random.randint(10, 20) + 1
     self.max_hp = 0
     self.name = "Monster"
@@ -33,7 +33,7 @@ class Monster:
       return False
 
 class MiniMonster(Monster):
-  def __init__(self, hp):
+  def __init__(self):
     super().__init__()
     self.name = "Mini Monster"
     self.image = "〴⋋⋌〵"
