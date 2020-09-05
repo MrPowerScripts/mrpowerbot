@@ -60,17 +60,15 @@ class Monsters(commands.Cog):
     if float(arg):
       self.probability = float(arg)
       print(f"new probability: {self.probability}")
-      
-  def wtf(self, wtf):
-    return f"<@{wtf}>: {self.monster_attackers[wtf]}"
 
   def mm_formated(self):
-    # print("updaing monster message")
+    print("updaing monster message")
     battle_over = self.battle_over()
     try:
       if battle_over:
         print("battle is over")
-        attackers = list(map(lambda m: self.wtf(m), self.monster_attackers))
+        attackers = list(map(lambda m: f"<@{m}>: {self.monster_attackers[m]}", self.monster_attackers))
+        print("attackers listed")
       return f"""
         <@&{MONSTERS_ROLE}> has arrived!
         {self.monster.image}
