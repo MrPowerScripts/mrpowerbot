@@ -53,7 +53,7 @@ class Main(commands.Cog):
 
   @commands.Cog.listener()
   async def on_raw_reaction_add(self, payload):
-    print(payload)
+    # print(payload)
     channel = discord.utils.get(self.bot.get_all_channels(), id=payload.channel_id)
     message = await channel.fetch_message(payload.message_id)
     receiver = message.author
@@ -81,7 +81,7 @@ class Main(commands.Cog):
 
   @commands.Cog.listener()
   async def on_raw_reaction_remove(self, payload):
-    print(payload)
+    # print(payload)
     channel = discord.utils.get(self.bot.get_all_channels(), id=payload.channel_id)
     message = await channel.fetch_message(payload.message_id)
     receiver = message.author
@@ -154,14 +154,14 @@ class Main(commands.Cog):
 
   @commands.command()
   async def zaps(self, ctx):
-    print(f"zaps {ctx.message.author.name}")
+    # print(f"zaps {ctx.message.author.name}")
     zaps = db.zaps(ctx.message.author.id)
     await ctx.message.channel.send(f"{ctx.message.author.name}: {str(zaps)}")
 
   @commands.command()
   async def zapleaders(self, ctx):
     zaps = db.zap_leaders()
-    print(zaps)
+    # print(zaps)
     message = '\n'.join(map(str, zaps))
 
     await ctx.message.channel.send(f"{message}")
