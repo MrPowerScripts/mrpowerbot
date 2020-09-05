@@ -65,8 +65,10 @@ class Main(commands.Cog):
     # print(f"time limit: {time_limit}")
     if receiver.id == payload.user_id:
       # print("emoji from author")
+      pass
     elif msg_created <= time_limit:
       # print("message too old")
+      pass
     else:
       # print("checking if zap")
       # print(f"emoji is: {payload.emoji}")
@@ -91,8 +93,10 @@ class Main(commands.Cog):
     # print(f"time limit: {time_limit}")
     if receiver.id == payload.user_id:
       # print("emoji from author")
+      pass
     elif msg_created <= time_limit:
       # print("message too old")
+      pass
     else:
       # print("checking if zap")
       # print(f"emoji is: {payload.emoji}")
