@@ -60,22 +60,22 @@ class Main(commands.Cog):
     msg_created = message.created_at.timestamp()
     current_time = datetime.datetime.now().timestamp()
     time_limit = datetime.datetime.now().timestamp() - 600
-    print(f"message created: {msg_created}")
-    print(f"current time: {current_time}")
-    print(f"time limit: {time_limit}")
+    # print(f"message created: {msg_created}")
+    # print(f"current time: {current_time}")
+    # print(f"time limit: {time_limit}")
     if receiver.id == payload.user_id:
-      print("emoji from author")
+      # print("emoji from author")
     elif msg_created <= time_limit:
-      print("message too old")
+      # print("message too old")
     else:
-      print("checking if zap")
-      print(f"emoji is: {payload.emoji}")
+      # print("checking if zap")
+      # print(f"emoji is: {payload.emoji}")
       if str(payload.emoji) == "⚡":
-        print("is zap. checking add")
+        # print("is zap. checking add")
         if payload.event_type == 'REACTION_ADD':
-          print(f"is add, going to zap {receiver}")
+          # print(f"is add, going to zap {receiver}")
           db.zap(receiver)
-          print("zapped!")
+          # print("zapped!")
 
   @commands.Cog.listener()
   async def on_raw_reaction_remove(self, payload):
@@ -86,22 +86,22 @@ class Main(commands.Cog):
     msg_created = message.created_at.timestamp()
     current_time = datetime.datetime.now().timestamp()
     time_limit = datetime.datetime.now().timestamp() - 10
-    print(f"message created: {msg_created}")
-    print(f"current time: {current_time}")
-    print(f"time limit: {time_limit}")
+    # print(f"message created: {msg_created}")
+    # print(f"current time: {current_time}")
+    # print(f"time limit: {time_limit}")
     if receiver.id == payload.user_id:
-      print("emoji from author")
+      # print("emoji from author")
     elif msg_created <= time_limit:
-      print("message too old")
+      # print("message too old")
     else:
-      print("checking if zap")
-      print(f"emoji is: {payload.emoji}")
+      # print("checking if zap")
+      # print(f"emoji is: {payload.emoji}")
       if str(payload.emoji) == "⚡":
-        print("is zap. checking remove")
+        # print("is zap. checking remove")
         if payload.event_type == 'REACTION_REMOVE':
-          print(f"is remove, going to remove zap from {receiver}")
+          # print(f"is remove, going to remove zap from {receiver}")
           db.zap(receiver, remove=True)
-          print("zapped!")
+          # print("zapped!")
 
   @commands.command()
   @commands.has_role(MOD_ROLE)

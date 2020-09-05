@@ -65,7 +65,7 @@ class Monsters(commands.Cog):
     return f"<@{wtf}>: {self.monster_attackers[wtf]}"
 
   def mm_formated(self):
-    print("updaing monster message")
+    # print("updaing monster message")
     battle_over = self.battle_over()
     try:
       if battle_over:
@@ -84,25 +84,25 @@ class Monsters(commands.Cog):
   
   def battle_over(self):
     if self.monster.times_up() or self.monster.is_ded():
-      print("the battle is over")
+      # print("the battle is over")
       return True
     else:
       return False
 
   async def start_battle(self):
-    print("starting monster game")
+    # print("starting monster game")
     try:
       self.monster = random.choice(monster_mash)()
       self.monster.max_hp = self.monster.hp
     except Exception as e:
       print(e)
-    print("monster created.")
+    # print("monster created.")
     self.monster_attackers.clear()
-    print("monster attackers cleared")
+    # print("monster attackers cleared")
     message = await self.game_channel.send(self.mm_formated())
-    print('monster messaged created')
+    # print('monster messaged created')
     self.monster_message = message
-    print(message)
+    # print(message)
     await self.monster_message.add_reaction("⚡")
     self.battling = True
     print(self.mm_formated())
