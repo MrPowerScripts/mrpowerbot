@@ -64,13 +64,14 @@ class Monsters(commands.Cog):
     return f"<@{wtf}>: {self.monster_attackers[wtf]}"
 
   def mm_formated(self):
+    attackers = list(map(lambda m: self.wtf(m), self.monster_attackers))
     return f"""
       <@&{MONSTERS_ROLE}> has arrived!
       {self.monster.image}
       `Name:` {self.monster.name}
       `HP:` {self.monster.hp}
       `Status:` {self.monster.status}
-      {f"`Attackers:` {list(map(lambda m: self.wtf(m), self.monster_attackers))}" if self.battle_over() else ""}
+      {f"`Attackers:` {attackers}" if self.battle_over() else ""}
       """[1:-1]
 
   def battle_over(self):
