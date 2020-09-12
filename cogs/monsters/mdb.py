@@ -11,7 +11,7 @@ def save(discord_id, mondata):
   try:
     cursor.execute("""
     INSERT INTO users ("mondata", "discord_id") 
-    VALUES ('%(mondata)s', '%(discord_id)s')
+    VALUES (%(mondata)s, '%(discord_id)s')
     ON CONFLICT (discord_id) DO UPDATE
     SET mondata = %(mondata)s;
     """, {"discord_id": discord_id, "mondata": json.dumps(mondata)})
