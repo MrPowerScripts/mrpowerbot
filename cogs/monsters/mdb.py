@@ -1,5 +1,5 @@
 import json
-from ...db import conn
+from ..db import conn
 
 def save(discord_id, mondata):
   cursor = conn.cursor()
