@@ -114,7 +114,7 @@ class Monsters(commands.Cog):
     self.battling = False
     self.last_run = int(time.time())
     # solo kills
-    if sum(self.monster_attackers.values()) == 1:
+    if len(self.monster_attackers.values()) == 1:
       attacker = self.monster_attackers.most_common()[0]
       atckr = mdb.load(attacker)
       if not 'solo_kill' in atckr:
