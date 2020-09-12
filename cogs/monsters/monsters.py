@@ -132,7 +132,7 @@ class Monsters(commands.Cog):
             self.monster_attackers[payload.member.id] += 1
             print(self.monster_attackers)
             if self.battle_over():
-              self.end_battle()
+              await self.end_battle()
 
   @tasks.loop(seconds=1.0)
   async def run_monsters(self):
