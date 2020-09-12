@@ -1,7 +1,8 @@
 import random
 import discord
 import time
-import mdb
+from cogs.monsters import mdb
+
 from utils import (
   TEST_CHANNEL, MRPSBOT_CHANNEL, MONSTERS_ROLE, 
   MOD_ROLE, MRPOWERBOT, prob
