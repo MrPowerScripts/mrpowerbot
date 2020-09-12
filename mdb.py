@@ -1,4 +1,4 @@
-from ...db import conn
+from .db import conn
 import json
 
 def save(discord_id, mondata):
