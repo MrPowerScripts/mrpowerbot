@@ -113,7 +113,10 @@ class Monsters(commands.Cog):
     self.last_run = int(time.time())
     for attacker in self.monster_attackers:
       atckr = mdb.load(attacker)
-      atckr['attacks'] += self.monster_attackers[attacker]
+      if not atckr['attacks']:
+        atckr['attacks'] = 0
+      else:
+        atckr['attacks'] += self.monster_attackers[attacker]
       mdb.save(attacker, atckr)
     await self.monster_message.edit(content=self.mm_formated())
   
