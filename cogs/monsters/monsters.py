@@ -52,6 +52,7 @@ class Monsters(commands.Cog):
     self.run_monsters.start()
     self.monster = None
     self.battling = False
+    self.killing_blow = None
     self.monster_attackers = Counter()
     self.monster_message = None
     self.game_channel = None
@@ -94,6 +95,7 @@ class Monsters(commands.Cog):
     try:
       self.monster = random.choice(monster_mash)()
       self.monster.max_hp = self.monster.hp
+      self.killing_blow = None
     except Exception as e:
       print(e)
     # print("monster created.")
@@ -111,11 +113,30 @@ class Monsters(commands.Cog):
     # final update before reset
     self.battling = False
     self.last_run = int(time.time())
+    # solo kills
+    if sum(self.monster_attackers.itervalues()) == 1:
+      attacker = self.monster_attackers.most_common()[0]
+      atckr = mdb.load(attacker)
+      if not 'solo_kill' in atckr:
+        atckr['solo_kill'] = 0
+      atckr['solo_kill'] += 1
+      mdb.save(attacker, atckr)
+    #Attacks
     for attacker in self.monster_attackers:
       atckr = mdb.load(attacker)
+      #Battles
+      if not 'battles' in atckr:
+        atckr['battles'] = 0
+      atckr['battles'] += 1
+      # Attacks
       if not 'attacks' in atckr:
         atckr['attacks'] = 0
       atckr['attacks'] += self.monster_attackers[attacker]
+      #Killing blows
+      if attacker == self.killing_blow:
+        if not 'killing_blows' in atckr:
+          atckr['killing_blows'] = 0
+        atckr['killing_blows'] += 1
       mdb.save(attacker, atckr)
     await self.monster_message.edit(content=self.mm_formated())
   
@@ -131,6 +152,8 @@ class Monsters(commands.Cog):
         if str(payload.emoji) == "⚡":
           if payload.user_id != MRPOWERBOT:
             self.monster.remove_hp(1)
+            if self.monster.hp < 1 and self.killing_blow = None:
+              self.killing_blow = payload.member.id
             self.monster_attackers[payload.member.id] += 1
             print(self.monster_attackers)
             if self.battle_over():
