@@ -113,7 +113,7 @@ class Monsters(commands.Cog):
     self.last_run = int(time.time())
     for attacker in self.monster_attackers:
       atckr = mdb.load(attacker)
-      if not atckr['attacks']:
+      if not 'attacks' in atckr:
         atckr['attacks'] = 0
       else:
         atckr['attacks'] += self.monster_attackers[attacker]
