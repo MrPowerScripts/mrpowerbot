@@ -1,9 +1,5 @@
 import json
-import psycopg2
-
-DATABASE_URL = os.environ['DATABASE_URL']
-
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+from ...db import conn
 
 def save(discord_id, mondata):
   cursor = conn.cursor()
