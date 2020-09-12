@@ -31,6 +31,7 @@ def load(discord_id):
     WHERE discord_id = %(discord_id)s;
     """, {"discord_id": int(discord_id)})
     mondata = cursor.fetchone()
+    print(f"User MonData: {mondata}")
     return json.loads(mondata[0])
   except Exception as e:
     print(e)
