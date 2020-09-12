@@ -1,6 +1,7 @@
 import random
 import discord
 import time
+import mdb
 from utils import (
   TEST_CHANNEL, MRPSBOT_CHANNEL, MONSTERS_ROLE, 
   MOD_ROLE, MRPOWERBOT, prob
@@ -109,6 +110,10 @@ class Monsters(commands.Cog):
     # final update before reset
     self.battling = False
     self.last_run = int(time.time())
+    for attacker in self.monster_attackers:
+      atckr = mdb.load(attacker)
+      atckr['attacks'] += self.monster_attackers[attacker]
+      mdb.save(attacker, atckr)
     await self.monster_message.edit(content=self.mm_formated())
   
   @commands.Cog.listener()
