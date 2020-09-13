@@ -5,7 +5,7 @@ from . import mdb
 
 from utils import (
   TEST_CHANNEL, MRPSBOT_CHANNEL, MONSTERS_ROLE, 
-  MOD_ROLE, MRPOWERBOT, prob
+  MOD_ROLE, MRPOWERBOT,  prob
   )
 from discord.ext import commands, tasks
 from collections import Counter
@@ -63,6 +63,12 @@ class Monsters(commands.Cog):
     if float(arg):
       self.probability = float(arg)
       print(f"new probability: {self.probability}")
+
+  @commands.command()
+  @commands.has_role(MOD_ROLE)
+  async def monstats(self, ctx):
+    stats = mdb.get_stats()
+    print(stats)
 
   def mm_formated(self):
     print("updaing monster message")

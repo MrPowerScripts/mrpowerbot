@@ -38,3 +38,24 @@ def load(discord_id):
     raise e
   finally:
     cursor.close()
+
+def get_stats():
+  cursor = conn.cursor()
+  try:
+    stats = {}
+    for stat in ["attacks", 'killing_blows', 'battles', 'solo_kills']:
+      cursor.execute(f"""
+      SELECT username, mondata->>'{stat}' AS {stat} 
+      FROM users 
+      WHERE users.mondata != '{{}}' 
+      ORDER BY mondata->>'{stat}' DESC LIMIT 5; 
+      """)
+      stats[stat] = cursor.fetch()
+    print(stats)
+    return stats
+  except Exception as e:
+    print(e)
+    raise e
+  finally:
+    cursor.close()
+
