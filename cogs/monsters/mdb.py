@@ -43,7 +43,7 @@ def get_stats():
   cursor = conn.cursor()
   try:
     stats = {}
-    for stat in ["attacks", 'killing_blows', 'battles', 'solo_kills']:
+    for stat in ["attacks", 'killing_blows', 'battles', 'solo_kill']:
       cursor.execute(f"""
       SELECT username, mondata->>'{stat}' AS {stat} 
       FROM users 
