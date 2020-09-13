@@ -73,7 +73,7 @@ class Monsters(commands.Cog):
       for action in stats.keys():
         statsf[action] = list(map(lambda m: f"{stats[action][0][0]}: {stats[action][1]}", stats[action]))
       
-      ctx.channel.send(stasf)
+      ctx.channel.send(statsf)
       # return f"""
       #   {statsf}
       #   """[1:-1]
