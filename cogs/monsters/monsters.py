@@ -71,8 +71,9 @@ class Monsters(commands.Cog):
       stats = mdb.get_stats()
       statsfmted  = ""
       for action in stats.keys():
-        statsfmted += f'{action}\n'
-        statsfmted.join(map(str, stats[action]))
+        statsfmted += f'{action}\n-------------'
+        statsfmted += '\n'.join(map(str, stats[action]))
+        print(statsfmted.join(map(str, stats[action])))
         statsfmted += '\n'
 
         # statsf[action] = list(map(lambda m: f"{stats[action][0][0]}: {stats[action][1]}", stats[action]))
