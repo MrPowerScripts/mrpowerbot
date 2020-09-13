@@ -46,7 +46,7 @@ class Monsters(commands.Cog):
       statsfmted  = ""
       for action in stats.keys():
         statsfmted += f'----------{action}------------\n'
-        statsfmted += '\n'.join(map(lamdba m: f"{m[0]}: {m[1]}", stats[action]))
+        statsfmted += '\n'.join(map(lambda m: f"{m[0]}: {m[1]}", stats[action]))
         #print(statsfmted.join(map(str, stats[action])))
         statsfmted += '\n\n'
 
