@@ -180,6 +180,10 @@ class Monsters(commands.Cog):
             if self.battle_over():
               await self.end_battle()
 
+  @tasks.loop(hours=12)
+  async def auto_stats(self, ctx):
+    await ctx.invoke(self.bot.get_command('play'), query='hi')
+
   @tasks.loop(seconds=1.0)
   async def run_monsters(self):
     if prob(self.probability):
