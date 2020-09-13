@@ -69,11 +69,15 @@ class Monsters(commands.Cog):
     try:
       print("getting stats")
       stats = mdb.get_stats()
-      statsf = {}
+      statsfmted  = ""
       for action in stats.keys():
-        statsf[action] = list(map(lambda m: f"{stats[action][0][0]}: {stats[action][1]}", stats[action]))
+        statsfmted += f'{actions}\n'
+        statsfmted.join(map(str, stats[action]))
+        statsfmted += '\n'
+
+        # statsf[action] = list(map(lambda m: f"{stats[action][0][0]}: {stats[action][1]}", stats[action]))
       
-      await ctx.channel.send(statsf)
+      await ctx.channel.send(statsfmted)
       # return f"""
       #   {statsf}
       #   """[1:-1]
