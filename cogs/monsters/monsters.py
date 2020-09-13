@@ -2,6 +2,10 @@ import random
 import discord
 import time
 from . import mdb
+from .mons import (
+  Monster,
+  MiniMonster
+)
 
 from utils import (
   TEST_CHANNEL, MRPSBOT_CHANNEL, MONSTERS_ROLE, 
@@ -10,36 +14,6 @@ from utils import (
 from discord.ext import commands, tasks
 from collections import Counter
 
-class Monster:
-  def __init__(self):
-    self.hp = random.randint(10, 20) + 1
-    self.max_hp = 0
-    self.name = "Monster"
-    self.image = "〴⋋_⋌〵"
-    self.status = "Rawr"
-    self.escape_time = int(time.time()) + 600
-
-  def is_ded(self):
-    return self.hp < 1
-
-  def remove_hp(self, amount):
-    self.hp = self.hp - amount
-    if self.hp < 1:
-      self.status = 'ded'
-
-  def times_up(self):
-    if int(time.time()) > self.escape_time:
-      self.status = "escaped"
-      return True
-    else:
-      return False
-
-class MiniMonster(Monster):
-  def __init__(self):
-    super().__init__()
-    self.name = "Mini Monster"
-    self.image = "〴⋋⋌〵"
-    self.hp = random.randint(2, 5)
 
 monster_mash = [Monster, MiniMonster]
 
@@ -72,7 +46,7 @@ class Monsters(commands.Cog):
       statsfmted  = ""
       for action in stats.keys():
         statsfmted += f'----------{action}------------\n'
-        statsfmted += '\n'.join(map(str, stats[action]))
+        statsfmted += '\n'.join(map(lamdba m: f"{m[0]}: {m[1]}", stats[action]))
         #print(statsfmted.join(map(str, stats[action])))
         statsfmted += '\n\n'
 
