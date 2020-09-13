@@ -51,7 +51,6 @@ def get_stats():
       ORDER BY mondata->>'{stat}' DESC LIMIT 5; 
       """)
       stats[stat] = cursor.fetchall()
-    print(stats)
     return stats
   except Exception as e:
     print(e)

@@ -65,10 +65,20 @@ class Monsters(commands.Cog):
       print(f"new probability: {self.probability}")
 
   @commands.command()
-  @commands.has_role(MOD_ROLE)
   async def monstats(self, ctx):
-    stats = mdb.get_stats()
-    print(stats)
+    try:
+      print("getting stats")
+      stats = mdb.get_stats()
+      statsf = {}
+      for action in stats.keys():
+        statsf[action] = list(map(lambda m: f"{stats[action][0][0]}: {stats[action][1]}", stats[action]))
+      
+      ctx.channel.send(stasf)
+      # return f"""
+      #   {statsf}
+      #   """[1:-1]
+    except Exception as e:
+      print(e)
 
   def mm_formated(self):
     print("updaing monster message")
