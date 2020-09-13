@@ -50,7 +50,7 @@ def get_stats():
       WHERE users.mondata != '{{}}' 
       ORDER BY mondata->>'{stat}' DESC LIMIT 5; 
       """)
-      stats[stat] = cursor.fetch()
+      stats[stat] = cursor.fetchall()
     print(stats)
     return stats
   except Exception as e:
