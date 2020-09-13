@@ -71,7 +71,7 @@ class Monsters(commands.Cog):
       stats = mdb.get_stats()
       statsfmted  = ""
       for action in stats.keys():
-        statsfmted += f'{actions}\n'
+        statsfmted += f'{action}\n'
         statsfmted.join(map(str, stats[action]))
         statsfmted += '\n'
 
