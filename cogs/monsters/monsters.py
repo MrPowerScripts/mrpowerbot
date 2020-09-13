@@ -117,18 +117,18 @@ class Monsters(commands.Cog):
     if len(self.monster_attackers.values()) == 1:
       attacker = self.monster_attackers.most_common()[0][0]
       atckr = mdb.load(attacker)
-      atckr['solo_kill'] = (atckr['solo_kill'] || 0) + 1
+      atckr['solo_kill'] = (atckr['solo_kill'] or 0) + 1
       mdb.save(attacker, atckr)
     #Attacks
     for attacker in self.monster_attackers:
       atckr = mdb.load(attacker)
       #Battles
-      atckr['battles'] = (atckr['battles'] || 0) + 1
+      atckr['battles'] = (atckr['battles'] or 0) + 1
       # Attacks
-      atckr['attacks'] = (atckr['attacks'] || 0) + self.monster_attackers[attacker]
+      atckr['attacks'] = (atckr['attacks'] or 0) + self.monster_attackers[attacker]
       #Killing blows
       if attacker == self.killing_blow:
-        atckr['killing_blows'] = (atckr['killing_blows'] || 0) + 1
+        atckr['killing_blows'] = (atckr['killing_blows'] or 0) + 1
       mdb.save(attacker, atckr)
     await self.monster_message.edit(content=self.mm_formated())
   
