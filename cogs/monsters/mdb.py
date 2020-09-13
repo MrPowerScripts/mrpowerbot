@@ -48,7 +48,7 @@ def get_stats():
       SELECT username, mondata->>'{stat}' AS {stat} 
       FROM users 
       WHERE users.mondata != '{{}}'
-      AND WHERE users.mondata->'{stat}' IS NOT NULL
+      AND users.mondata->'{stat}' IS NOT NULL
       ORDER BY mondata->>'{stat}' DESC LIMIT 5; 
       """)
       stats[stat] = cursor.fetchall()
