@@ -1,4 +1,5 @@
 import random
+import time
 
 class Monster:
   def __init__(self):
