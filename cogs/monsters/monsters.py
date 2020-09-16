@@ -20,9 +20,9 @@ monster_mash = [Monster, MiniMonster]
 class Monsters(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
-    self.probability = 0.0001
+    self.probability = 0.0005
     self.last_run = 0
-    self.respawn_limit = 86400
+    self.respawn_limit = 3600
     self.run_monsters.start()
     self.monster = None
     self.battling = False
