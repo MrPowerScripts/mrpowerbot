@@ -1,6 +1,7 @@
 import random
 import discord
 import time
+from ... import db
 from . import mdb
 from .mons import (
   Monster,
@@ -112,8 +113,12 @@ class Monsters(commands.Cog):
     # final update before reset
     self.battling = False
     self.last_run = int(time.time())
+
+    mpbzaps = db.zaps(MRPOWERBOT)
+
+    atckr_count = len(self.monster_attackers.values())
     # solo kills
-    if len(self.monster_attackers.values()) == 1:
+    if atckr_count== 1:
       attacker = self.monster_attackers.most_common()[0][0]
       atckr = mdb.load(attacker)
       if not 'solo_kill' in atckr:
@@ -122,6 +127,8 @@ class Monsters(commands.Cog):
       mdb.save(attacker, atckr)
     #Attacks
     for attacker in self.monster_attackers:
+      # zaps
+      db.zap(attacker, value=self.monster_attackers[attacker]) 
       atckr = mdb.load(attacker)
       #Battles
       if not 'battles' in atckr:
@@ -137,6 +144,9 @@ class Monsters(commands.Cog):
           atckr['killing_blows'] = 0
         atckr['killing_blows'] += 1
       mdb.save(attacker, atckr)
+
+    #remove mrpowerbot zaps
+    db.zap(MRPOWERBOT, value=mpbzaps, remove=True)
     await self.monster_message.edit(content=self.mm_formated())
   
   @commands.Cog.listener()
