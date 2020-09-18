@@ -115,7 +115,7 @@ class Monsters(commands.Cog):
     self.battling = False
     self.last_run = int(time.time())
 
-    mpbzaps = db.zaps(MRPOWERBOT)
+    # mpbzaps = db.zaps(MRPOWERBOT)
 
     atckr_count = len(self.monster_attackers.values())
     # solo kills
@@ -129,8 +129,8 @@ class Monsters(commands.Cog):
     #Attacks
     for attacker in self.monster_attackers:
       # zaps
-      attacker_user = client.get_user(attacker)
-      db.zap(attacker_user, value=self.monster_attackers[attacker]) 
+      # attacker_user = client.get_user(attacker)
+      # db.zap(attacker_user, value=self.monster_attackers[attacker]) 
       atckr = mdb.load(attacker)
       #Battles
       if not 'battles' in atckr:
@@ -148,8 +148,8 @@ class Monsters(commands.Cog):
       mdb.save(attacker, atckr)
 
     #remove mrpowerbot zaps
-    mpb_user = client.get_user(MRPOWERBOT)
-    db.zap(mpb_user, value=mpbzaps, remove=True)
+    # mpb_user = client.get_user(MRPOWERBOT)
+    # db.zap(mpb_user, value=mpbzaps, remove=True)
     await self.monster_message.edit(content=self.mm_formated())
   
   @commands.Cog.listener()
