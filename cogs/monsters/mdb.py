@@ -49,7 +49,7 @@ def get_stats():
       FROM users 
       WHERE users.mondata != '{{}}'
       AND users.mondata->'{stat}' IS NOT NULL
-      ORDER BY mondata->>'{stat}' DESC LIMIT 5; 
+      ORDER BY (users.mondata->>'{stat}')::INTEGER DESC LIMIT 5; 
       """)
       stats[stat] = cursor.fetchall()
     return stats
