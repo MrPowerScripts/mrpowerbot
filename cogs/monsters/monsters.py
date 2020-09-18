@@ -79,7 +79,7 @@ class Monsters(commands.Cog):
         `HP:` {self.monster.hp}/{self.monster.max_hp}
         `Status:` {self.monster.status}
         {f"`Attackers:` {attackers}" if battle_over else ""}
-        {f"`Killing Blow:` <@{self.killing_blow}>" if battle_over and if this.killing_blow != None else ""}
+        {f"`Killing Blow:` <@{self.killing_blow}>" if battle_over and if self.killing_blow != None else ""}
         """[1:-1]
     except Exception as e:
       print(e)
