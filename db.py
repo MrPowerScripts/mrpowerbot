@@ -50,7 +50,7 @@ def zap(user, value=False, remove=False):
   else:
     value = 1
   cursor = conn.cursor()
-
+  
   query = f"""
     INSERT INTO users ("discord_id","zaps") 
     VALUES (%(discord_id)s, 0)

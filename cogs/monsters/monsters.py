@@ -128,7 +128,8 @@ class Monsters(commands.Cog):
     #Attacks
     for attacker in self.monster_attackers:
       # zaps
-      db.zap(attacker, value=self.monster_attackers[attacker]) 
+      attacker_user = await self.bot.get_user_info(attacker)
+      db.zap(attacker_user, value=self.monster_attackers[attacker]) 
       atckr = mdb.load(attacker)
       #Battles
       if not 'battles' in atckr:
@@ -146,7 +147,8 @@ class Monsters(commands.Cog):
       mdb.save(attacker, atckr)
 
     #remove mrpowerbot zaps
-    db.zap(MRPOWERBOT, value=mpbzaps, remove=True)
+    mpb_user = await self.bot.get_user_info(MRPOWERBOT)
+    db.zap(mpb_user, value=mpbzaps, remove=True)
     await self.monster_message.edit(content=self.mm_formated())
   
   @commands.Cog.listener()
