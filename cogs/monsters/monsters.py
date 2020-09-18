@@ -4,7 +4,10 @@ import time
 from . import mdb
 from .mons import (
   Monster,
-  MiniMonster
+  MiniMonster,
+  BattleTwins,
+  Bear,
+  PureAnger
 )
 
 from utils import (

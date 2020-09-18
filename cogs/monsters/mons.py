@@ -31,3 +31,24 @@ class MiniMonster(Monster):
     self.name = "Mini Monster"
     self.image = "〴⋋⋌〵"
     self.hp = random.randint(2, 5)
+
+class BattleTwins(Monster):
+  def __init__(self):
+    super().__init__()
+    self.name = "Battle Twins"
+    self.image = "つ ◕_◕ ༽つ つ ◕_◕ ༽つ"
+    self.hp = random.randint(25, 45)
+
+class PureAnger(Monster):
+  def __init__(self):
+    super().__init__()
+    self.name = "Pure Anger"
+    self.image = "ლ(ಠ益ಠ)ლ"
+    self.hp = random.randint(40, 60)
+
+class Bear(Monster):
+  def __init__(self):
+    super().__init__()
+    self.name = "Bear"
+    self.image = "ʕ·͡ᴥ·ʔ"
+    self.hp = random.randint(5, 15)
