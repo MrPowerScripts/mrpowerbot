@@ -68,7 +68,7 @@ class Monsters(commands.Cog):
         attackers = list(map(lambda m: f"<@{m}>: {self.monster_attackers[m]}", self.monster_attackers))
         print("attackers listed")
       return f"""
-        <@&{MONSTERS_ROLE}> has arrived!
+        <@&{MONSTERS_ROLE}> has arrived! Tap ⚡ repeatedly to attack!
         {self.monster.image}
         `Name:` {self.monster.name}
         `HP:` {self.monster.hp}/{self.monster.max_hp}
