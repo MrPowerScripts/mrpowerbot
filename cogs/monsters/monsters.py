@@ -1,7 +1,7 @@
 import random
 import discord
 import time
-from ... import db
+import db
 from . import mdb
 from .mons import (
   Monster,
