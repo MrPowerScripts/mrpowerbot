@@ -12,7 +12,7 @@ class MonDB():
     self.cur = self.conn.cursor()
     self.mondata = ""
 
-  class dbcycle():
+  class dbcycle(self):
     def __call__(self, decorated):
       self.__load()
       decorated(self)
