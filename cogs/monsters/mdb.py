@@ -45,7 +45,7 @@ class MonDB():
     self._load()
     if not stat in self.mondata:
       self.mondata[stat] = 0
-    self.mmondata[stat] += value
+    self.mondata[stat] += value
     self._save()
 
 mondb = MonDB()
