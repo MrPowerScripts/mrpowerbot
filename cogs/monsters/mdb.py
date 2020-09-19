@@ -17,7 +17,7 @@ class MonDB():
         self._load()
         func(self)
         self._save()
-      return wrap
+        return wrap
 
   def _save(self):
     try:
