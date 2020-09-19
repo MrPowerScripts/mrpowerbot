@@ -12,12 +12,6 @@ class MonDB():
     self.cur = self.conn.cursor()
     self.mondata = ""
 
-  class dbcycle(self):
-    def __call__(self, decorated):
-      self.__load()
-      decorated(self)
-      self._save()
-
   def _save(self):
     try:
       self.cur.execute("""
@@ -44,11 +38,12 @@ class MonDB():
       print(e)
       raise e
 
-  @dbcycle
   def add_stat(self, stat, value=1):
+    self._load()
     if not stat in self.mondata:
       self.mondata[stat] = 0
     self.mondata[stat] += value
+    self._save()
 
 def get_stats():
   cursor = conn.cursor()
