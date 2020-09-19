@@ -12,15 +12,14 @@ from .mons import (
   PureAnger
 )
 
+monster_mash = [Monster, MiniMonster, BattleTwins, Bear, PureAnger]
+
 from utils import (
   TEST_CHANNEL, MRPSBOT_CHANNEL, MONSTERS_ROLE, 
   MOD_ROLE, MRPOWERBOT,  prob
   )
 from discord.ext import commands, tasks
 from collections import Counter
-
-
-monster_mash = [Monster, MiniMonster]
 
 class Monsters(commands.Cog):
   def __init__(self, bot):
