@@ -49,7 +49,7 @@ class Monsters(commands.Cog):
   @commands.has_role(MOD_ROLE)
   async def montest(self, ctx):
     self.montest = True
-      print(f"testings")
+    print(f"testings")
 
   @commands.command()
   async def monstats(self, ctx):
