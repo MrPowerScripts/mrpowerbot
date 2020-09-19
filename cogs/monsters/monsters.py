@@ -25,7 +25,7 @@ from collections import Counter
 class Monsters(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
-    self.mdb = MonDB()
+    self.mondb = MonDB()
     self.probability = 0.0005
     self.last_run = 0
     self.respawn_limit = 3600
@@ -48,7 +48,7 @@ class Monsters(commands.Cog):
   async def monstats(self, ctx):
     try:
       print("getting stats")
-      stats = self.mdb.get_stats()
+      stats = mdb.get_stats()
       statsfmted  = ""
       for action in stats.keys():
         statsfmted += f'----------{action}------------\n'
