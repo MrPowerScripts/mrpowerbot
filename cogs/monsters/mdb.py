@@ -13,9 +13,7 @@ class MonDB():
     self.mondata = ""
 
   class dbcycle():
-    def __init__(self, decorated):
-        self._decorated = decorated
-    def __call__():
+    def __call__(self, decorated):
       self.__load()
       decorated(self)
       self._save()
