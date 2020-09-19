@@ -48,8 +48,6 @@ class MonDB():
     self.mondata[stat] += value
     self._save()
 
-mondb = MonDB()
-
 def get_stats():
   cursor = conn.cursor()
   try:
