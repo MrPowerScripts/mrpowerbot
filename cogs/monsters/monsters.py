@@ -26,6 +26,7 @@ class Monsters(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
     self.mondb = MonDB()
+    self.montest = False
     self.probability = 0.0005
     self.last_run = 0
     self.respawn_limit = 3600
@@ -43,6 +44,12 @@ class Monsters(commands.Cog):
     if float(arg):
       self.probability = float(arg)
       print(f"new probability: {self.probability}")
+
+  @commands.command()
+  @commands.has_role(MOD_ROLE)
+  async def montest(self, ctx):
+    self.montest = True
+      print(f"testings")
 
   @commands.command()
   async def monstats(self, ctx):
@@ -95,7 +102,10 @@ class Monsters(commands.Cog):
   async def start_battle(self):
     # print("starting monster game")
     try:
-      self.monster = random.choice(monster_mash)()
+      if self.montest:
+        self.monster = MiniMonster()
+      else:
+        self.monster = random.choice(monster_mash)()
       self.monster.max_hp = self.monster.hp
       self.killing_blow = None
     except Exception as e:
@@ -114,6 +124,7 @@ class Monsters(commands.Cog):
   async def end_battle(self):
     # final update before reset
     self.battling = False
+    self.montest = False
     self.last_run = int(time.time())
 
     # mpbzaps = db.zaps(MRPOWERBOT)
@@ -168,7 +179,7 @@ class Monsters(commands.Cog):
 
   @tasks.loop(seconds=1.0)
   async def run_monsters(self):
-    if prob(self.probability):
+    if self.montest == True or prob(self.probability):
       print("HIT - should we play?")
       if int(time.time()) > (self.last_run + self.respawn_limit):
         await self.start_battle()
