@@ -35,7 +35,7 @@ class MonDB():
       FROM users 
       WHERE discord_id = %(discord_id)s;
       """, {"discord_id": int(self.discord_id)})
-      self.mondata = self.cur.fetchone()
+      self.mondata = self.cur.fetchone()[0]
       print(f"User MonData: {self.mondata}")
     except Exception as e:
       print(e)
