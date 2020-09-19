@@ -25,7 +25,7 @@ from collections import Counter
 class Monsters(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
-    self.mdb = monDB()
+    self.mdb = MonDB()
     self.probability = 0.0005
     self.last_run = 0
     self.respawn_limit = 3600
