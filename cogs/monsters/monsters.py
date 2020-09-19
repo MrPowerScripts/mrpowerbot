@@ -24,6 +24,7 @@ from collections import Counter
 class Monsters(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
+    self.mdb = mdb.monDB()
     self.probability = 0.0005
     self.last_run = 0
     self.respawn_limit = 3600
@@ -46,7 +47,7 @@ class Monsters(commands.Cog):
   async def monstats(self, ctx):
     try:
       print("getting stats")
-      stats = mdb.get_stats()
+      stats = self.mdb.get_stats()
       statsfmted  = ""
       for action in stats.keys():
         statsfmted += f'----------{action}------------\n'
@@ -120,31 +121,21 @@ class Monsters(commands.Cog):
     # solo kills
     if atckr_count== 1:
       attacker = self.monster_attackers.most_common()[0][0]
-      atckr = mdb.load(attacker)
-      if not 'solo_kill' in atckr:
-        atckr['solo_kill'] = 0
-      atckr['solo_kill'] += 1
-      mdb.save(attacker, atckr)
+      self.mondb.discord_id = attacker
+      self.mondb.add_stat('solo_kill')
     #Attacks
     for attacker in self.monster_attackers:
       # zaps
       # attacker_user = client.get_user(attacker)
       # db.zap(attacker_user, value=self.monster_attackers[attacker]) 
-      atckr = mdb.load(attacker)
+      self.mondb.discord_id = attacker
       #Battles
-      if not 'battles' in atckr:
-        atckr['battles'] = 0
-      atckr['battles'] += 1
+      self.mondb.add_stat('battles')
       # Attacks
-      if not 'attacks' in atckr:
-        atckr['attacks'] = 0
-      atckr['attacks'] += self.monster_attackers[attacker]
+      self.mondb.add_stat('attacks', self.monster_attackers[attacker])
       #Killing blows
       if attacker == self.killing_blow:
-        if not 'killing_blows' in atckr:
-          atckr['killing_blows'] = 0
-        atckr['killing_blows'] += 1
-      mdb.save(attacker, atckr)
+        self.mondb.add_stat('killing_blows')
 
     #remove mrpowerbot zaps
     # mpb_user = client.get_user(MRPOWERBOT)
