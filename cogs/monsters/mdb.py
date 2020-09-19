@@ -11,9 +11,13 @@ class MonDB():
     self.conn = conn
     self.cur = self.conn.cursor()
     self.mondata = ""
-    self.stats = [
-      'solo_kill', 'battles', 'attacks', 'killing_blows'
-    ]
+
+  def _dbcycle(func):
+      def wrap(self):
+        self._load()
+        func(self)
+        self._save()
+      return wrap
 
   def _save(self):
     try:
@@ -41,12 +45,11 @@ class MonDB():
       print(e)
       raise e
 
+  @_dbcycle
   def add_stat(self, stat, value=1):
-    self._load()
     if not stat in self.mondata:
       self.mondata[stat] = 0
     self.mondata[stat] += value
-    self._save()
 
 def get_stats():
   cursor = conn.cursor()
