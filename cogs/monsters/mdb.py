@@ -1,16 +1,17 @@
 import json
 import os
 import psycopg2
+from utils import MRPOWERBOT
 
 DATABASE_URL = os.environ['DATABASE_URL']
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 class MonDB():
   def __init__(self, conn=conn):
-    self.discord_id = ""
+    self.discord_id = None
     self.conn = conn
     self.cur = self.conn.cursor()
-    self.mondata = ""
+    self.mondata = None
 
   def _save(self):
     try:
