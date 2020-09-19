@@ -181,7 +181,7 @@ class Monsters(commands.Cog):
   async def run_monsters(self):
     if self.montest == True or prob(self.probability):
       print("HIT - should we play?")
-      if int(time.time()) > (self.last_run + self.respawn_limit):
+      if self.montest == True or int(time.time()) > (self.last_run + self.respawn_limit):
         await self.start_battle()
       else:
         print(f"Too Soon... last run: {self.last_run}, current: {time.time()}")
