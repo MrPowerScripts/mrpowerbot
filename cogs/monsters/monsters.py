@@ -4,6 +4,7 @@ import time
 import db
 from bot import client
 from . import mdb
+from .mdb import MonDB
 from .mons import (
   Monster,
   MiniMonster,
@@ -24,7 +25,7 @@ from collections import Counter
 class Monsters(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
-    self.mdb = mdb.monDB()
+    self.mdb = monDB()
     self.probability = 0.0005
     self.last_run = 0
     self.respawn_limit = 3600
