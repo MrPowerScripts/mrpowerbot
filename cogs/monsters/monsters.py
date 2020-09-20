@@ -192,6 +192,7 @@ class Monsters(commands.Cog):
           break
         if not self.monster.is_ded():
           await self.monster_message.edit(content=self.mm_formated())
+          time.sleep(1)
         else:
           await self.monster_message.edit(content=self.mm_formated())
           break
