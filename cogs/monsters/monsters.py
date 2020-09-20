@@ -43,6 +43,7 @@ class Monsters(commands.Cog):
   async def monprob(self, ctx, arg):
     if float(arg):
       self.probability = float(arg)
+      self.last_run = 999999
       print(f"new probability: {self.probability}")
 
   @commands.command()
