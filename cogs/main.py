@@ -6,6 +6,8 @@ import random
 import os
 import sys
 import db
+from typing import Optional
+from discord import TextChannel
 from utils import (
   MOD_ROLE, 
   STREAMER_ROLE, 
@@ -169,6 +171,11 @@ class Main(commands.Cog):
   @commands.command()
   async def yaml(self, ctx):
     await ctx.message.channel.send(f"https://www.youtube.com/watch?v=0GnWd4jiyH4")
+
+  @commands.command()
+  async def cd(self, ctx, channel: Optional[TextChannel]):
+    channel = channel or ctx.message.channel
+    await ctx.message.channel.send(channel.topic)
 
 def setup(bot):
   bot.add_cog(Main(bot))
