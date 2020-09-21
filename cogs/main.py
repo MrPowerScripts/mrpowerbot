@@ -13,7 +13,8 @@ from utils import (
   ROUNDTABLE_ROLE,
   REVISION,
   MRPS_GUILD,
-  MRPSTY_CHANNEL
+  MRPSTY_CHANNEL,
+  REDDIT_BOT_CHANNEL
 )
 
 class Main(commands.Cog):
@@ -169,6 +170,9 @@ class Main(commands.Cog):
   @commands.command()
   async def yaml(self, ctx):
     await ctx.message.channel.send(f"https://www.youtube.com/watch?v=0GnWd4jiyH4")
+
+  async def cd(self, ctx):
+    await ctx.message.channel.send(ctx.guild.get_channel(REDDIT_BOT_CHANNEL).topic)
 
 def setup(bot):
   bot.add_cog(Main(bot))
