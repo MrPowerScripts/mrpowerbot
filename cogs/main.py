@@ -171,6 +171,7 @@ class Main(commands.Cog):
   async def yaml(self, ctx):
     await ctx.message.channel.send(f"https://www.youtube.com/watch?v=0GnWd4jiyH4")
 
+  @commands.command()
   async def cd(self, ctx):
     await ctx.message.channel.send(ctx.guild.get_channel(REDDIT_BOT_CHANNEL).topic)
 
