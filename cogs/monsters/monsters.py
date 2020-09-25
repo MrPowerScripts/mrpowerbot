@@ -190,8 +190,7 @@ class Monsters(commands.Cog):
           await self.end_battle()
           break
         else:
-          await self.monster_message.edit(content=self.mm_formated())
-          time.sleep(3)
+          time.sleep(1)
 
 def setup(bot):
   bot.add_cog(Monsters(bot))
