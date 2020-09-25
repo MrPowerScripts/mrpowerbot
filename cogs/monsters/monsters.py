@@ -173,10 +173,6 @@ class Monsters(commands.Cog):
               self.monster_attackers[payload.member.id] += 1
               print(self.monster_attackers)
 
-  @tasks.loop(hours=12)
-  async def auto_stats(self, ctx):
-    await ctx.invoke(self.bot.get_command('play'), query='hi')
-
   @tasks.loop(seconds=1.0)
   async def run_monsters(self):
     if self.montest == True or prob(self.probability):
