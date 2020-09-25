@@ -91,6 +91,7 @@ class Monsters(commands.Cog):
         {f"`Killing Blow:` <@{self.killing_blow}>" if battle_over and self.killing_blow != None else ""}
         """[1:-1]
     except Exception as e:
+      print("monster message fail")
       print(e)
   
   def battle_over(self):
