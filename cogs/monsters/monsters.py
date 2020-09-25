@@ -174,7 +174,7 @@ class Monsters(commands.Cog):
       if payload.message_id == self.monster_message.id:
         if str(payload.emoji) == "⚡":
           if payload.user_id != MRPOWERBOT:
-            if self.monster.hp >= 1:
+            if self.monster.hp < 1:
               self.monster.remove_hp(1)
               if self.monster.hp < 1 and self.killing_blow == None:
                 self.killing_blow = payload.member.id
