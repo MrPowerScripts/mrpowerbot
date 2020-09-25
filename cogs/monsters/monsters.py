@@ -170,7 +170,9 @@ class Monsters(commands.Cog):
 
   @commands.Cog.listener()
   async def on_raw_reaction_add(self, payload):
+    print("checking battling")
     if self.battling:
+      print("we are battling")
       if payload.message_id == self.monster_message.id:
         if str(payload.emoji) == "⚡":
           if payload.user_id != MRPOWERBOT:
