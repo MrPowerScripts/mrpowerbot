@@ -175,6 +175,8 @@ class Monsters(commands.Cog):
                 self.killing_blow = payload.member.id
               self.monster_attackers[payload.member.id] += 1
               print(self.monster_attackers)
+            else:
+              await self.game_channel.send(self.mm_formated())
 
   @tasks.loop(seconds=1.0)
   async def run_monsters(self):
