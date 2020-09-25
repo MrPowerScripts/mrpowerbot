@@ -174,10 +174,14 @@ class Monsters(commands.Cog):
       if payload.message_id == self.monster_message.id:
         if str(payload.emoji) == "⚡":
           if payload.user_id != MRPOWERBOT:
+            print(f"monster hit - current hp: {self.monster.hp}")
             if self.monster.hp > 0:
+              print("monster still alive")
               self.monster.remove_hp(1)
+              print("hurt monster")
               if self.monster.hp < 1 and self.killing_blow == None:
                 self.killing_blow = payload.member.id
+                print("killing blow set")
               self.monster_attackers[payload.member.id] += 1
               print(self.monster_attackers)
             else:
