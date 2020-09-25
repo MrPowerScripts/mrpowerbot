@@ -71,6 +71,7 @@ class Monsters(commands.Cog):
       #   {statsf}
       #   """[1:-1]
     except Exception as e:
+      print("monstats fail")
       print(e)
 
   def mm_formated(self):
@@ -111,6 +112,7 @@ class Monsters(commands.Cog):
       self.monster.max_hp = self.monster.hp
       self.killing_blow = None
     except Exception as e:
+      print('start battle fail')
       print(e)
     # print("monster created.")
     self.monster_attackers.clear()
