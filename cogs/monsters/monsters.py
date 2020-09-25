@@ -103,7 +103,7 @@ class Monsters(commands.Cog):
       return False
 
   async def start_battle(self):
-    # print("starting monster game")
+    print("starting monster game")
     try:
       if self.montest:
         self.monster = MiniMonster()
@@ -123,9 +123,12 @@ class Monsters(commands.Cog):
     # print(message)
     await self.monster_message.add_reaction("⚡")
     self.battling = True
+    print("battle start finish")
     print(self.mm_formated())
 
+
   async def end_battle(self):
+    print("ending battle")
     # final update before reset
     self.battling = False
     self.montest = False
@@ -156,7 +159,9 @@ class Monsters(commands.Cog):
     #remove mrpowerbot zaps
     # mpb_user = client.get_user(MRPOWERBOT)
     # db.zap(mpb_user, value=mpbzaps, remove=True)
+    print("battle over - updating message")
     await self.monster_message.edit(content=self.mm_formated())
+    print("battle finished")
   
   @commands.Cog.listener()
   async def on_ready(self):
@@ -176,6 +181,7 @@ class Monsters(commands.Cog):
               self.monster_attackers[payload.member.id] += 1
               print(self.monster_attackers)
             else:
+              print("monster dead game update")
               await self.game_channel.send(self.mm_formated())
 
   @tasks.loop(seconds=1.0)
@@ -189,9 +195,11 @@ class Monsters(commands.Cog):
       
       while True:
         if self.battle_over():
+          print("game loop battle is over")
           await self.end_battle()
           break
         else:
+          print("game loop tick")
           time.sleep(1)
 
 def setup(bot):
