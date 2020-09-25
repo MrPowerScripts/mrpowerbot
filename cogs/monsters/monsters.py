@@ -166,11 +166,12 @@ class Monsters(commands.Cog):
       if payload.message_id == self.monster_message.id:
         if str(payload.emoji) == "⚡":
           if payload.user_id != MRPOWERBOT:
-            self.monster.remove_hp(1)
-            if self.monster.hp < 1 and self.killing_blow == None:
-              self.killing_blow = payload.member.id
-            self.monster_attackers[payload.member.id] += 1
-            print(self.monster_attackers)
+            if not self.monster.hp >= 0:
+              self.monster.remove_hp(1)
+              if self.monster.hp < 1 and self.killing_blow == None:
+                self.killing_blow = payload.member.id
+              self.monster_attackers[payload.member.id] += 1
+              print(self.monster_attackers)
 
   @tasks.loop(hours=12)
   async def auto_stats(self, ctx):
