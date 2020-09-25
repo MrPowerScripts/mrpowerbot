@@ -97,9 +97,10 @@ class Monsters(commands.Cog):
   
   def battle_over(self):
     if self.monster.times_up() or self.monster.is_ded():
-      # print("the battle is over")
+      print("the battle is over")
       return True
     else:
+      print("battle not over")
       return False
 
   async def start_battle(self):
