@@ -171,8 +171,6 @@ class Monsters(commands.Cog):
               self.killing_blow = payload.member.id
             self.monster_attackers[payload.member.id] += 1
             print(self.monster_attackers)
-            if self.battle_over():
-              await self.end_battle()
 
   @tasks.loop(hours=12)
   async def auto_stats(self, ctx):
@@ -188,15 +186,12 @@ class Monsters(commands.Cog):
         print(f"Too Soon... last run: {self.last_run}, current: {time.time()}")
       
       while True:
-        if self.monster.times_up():
-          await self.monster_message.edit(content=self.mm_formated())
+        if self.battle_over():
+          await self.end_battle()
           break
-        if not self.monster.is_ded():
-          await self.monster_message.edit(content=self.mm_formated())
-          time.sleep(1)
         else:
           await self.monster_message.edit(content=self.mm_formated())
-          break
+          time.sleep(1)
 
 def setup(bot):
   bot.add_cog(Monsters(bot))
