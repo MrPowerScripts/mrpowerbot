@@ -189,7 +189,6 @@ class Monsters(commands.Cog):
               print(self.monster_attackers)
             else:
               print("monster dead game update")
-              await self.game_channel.send(self.mm_formated())
 
   @tasks.loop(seconds=1.0)
   async def run_monsters(self):
