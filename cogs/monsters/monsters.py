@@ -193,19 +193,22 @@ class Monsters(commands.Cog):
   @tasks.loop(seconds=1.0)
   async def run_monsters(self):
     print('monster loop')
-    if self.battling == False or self.montest == True or prob(self.probability):
-      print("HIT - should we play?")
-      if self.montest == True or int(time.time()) > (self.last_run + self.respawn_limit):
-        await self.start_battle()
-      else:
-        print(f"Too Soon... last run: {self.last_run}, current: {time.time()}")
-    else:
+    if self.battling == True:
       print("we battling")
       if self.battle_over():
         print("game loop battle is over")
         await self.end_battle()
       else:
         print("game loop tick")
+    elif self.montest == True or prob(self.probability):
+      print("HIT - should we play?")
+      if self.montest == True or int(time.time()) > (self.last_run + self.respawn_limit):
+        await self.start_battle()
+      else:
+        print(f"Too Soon... last run: {self.last_run}, current: {time.time()}")
+    else:
+      print("no monster. just chillen?")
+
 
 def setup(bot):
   bot.add_cog(Monsters(bot))
