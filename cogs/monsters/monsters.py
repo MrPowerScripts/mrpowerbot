@@ -192,6 +192,7 @@ class Monsters(commands.Cog):
 
   @tasks.loop(seconds=1.0)
   async def run_monsters(self):
+    print('monster loop')
     if self.battling == False or self.montest == True or prob(self.probability):
       print("HIT - should we play?")
       if self.montest == True or int(time.time()) > (self.last_run + self.respawn_limit):
