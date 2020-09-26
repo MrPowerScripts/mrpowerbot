@@ -203,7 +203,6 @@ class Monsters(commands.Cog):
       if self.battle_over():
         print("game loop battle is over")
         await self.end_battle()
-        break
       else:
         print("game loop tick")
 
