@@ -50,7 +50,7 @@ class Bear(Monster):
   def __init__(self):
     super().__init__()
     self.name = "Bear"
-    self.image = "ʕ·͡ᴥ·ʔ"
+    self.image = "ʕ•ᴥ•ʔ"
     self.hp = random.randint(5, 15)
 
 class Bully(Monster):
