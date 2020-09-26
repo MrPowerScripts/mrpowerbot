@@ -181,7 +181,7 @@ class Monsters(commands.Cog):
             if self.monster.hp > 0:
               print("monster still alive")
               if self.monster.hp % 5 == 0:
-                await self.game_channel.send(self.mm_formated())
+                await self.monster_message.edit(content=self.mm_formated())
               self.monster.remove_hp(1)
               print("hurt monster")
               if self.monster.hp < 1 and self.killing_blow == None:
