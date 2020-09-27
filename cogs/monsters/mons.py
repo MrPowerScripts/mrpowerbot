@@ -67,7 +67,7 @@ class Squid(Monster):
     self.image = "くコ:彡"
     self.hp = random.randint(4, 28)
 
-class Killer Turtle(Monster):
+class Killer_Turtle(Monster):
   def __init__(self):
     super().__init__()
     self.name = "Killer Turtle"
