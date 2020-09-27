@@ -12,9 +12,13 @@ from .mons import (
   Bear,
   PureAnger,
   Bully,
+  Squid,
+  Killer_Turtle,
 )
 
-monster_mash = [Monster, MiniMonster, BattleTwins, Bear, PureAnger, Bully]
+monster_mash = [
+  Monster, MiniMonster, BattleTwins, 
+  Bear, PureAnger, Bully, Squid, Killer_Turtle]
 
 from utils import (
   TEST_CHANNEL, MRPSBOT_CHANNEL, MONSTERS_ROLE, 
