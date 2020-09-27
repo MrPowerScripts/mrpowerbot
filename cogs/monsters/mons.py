@@ -59,3 +59,17 @@ class Bully(Monster):
     self.name = "Bully"
     self.image = "(ง'̀-'́)ง"
     self.hp = random.randint(5, 40)
+
+class Squid(Monster):
+  def __init__(self):
+    super().__init__()
+    self.name = "Squid"
+    self.image = "くコ:彡"
+    self.hp = random.randint(4, 28)
+
+class Killer_Turtle(Monster):
+  def __init__(self):
+    super().__init__()
+    self.name = "Killer Turtle"
+    self.image = "𓆉"
+    self.hp = random.randint(25, 80)
