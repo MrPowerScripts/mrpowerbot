@@ -146,7 +146,7 @@ class Monsters(commands.Cog):
     self.last_run = int(time.time())
 
     print("saving the config")
-    self.mondb.config.level = self.mondb.config.level + 1
+    self.mondb.config['level'] = self.mondb.config['level'] + 1
     self.mondb.save_config()
 
     # mpbzaps = db.zaps(MRPOWERBOT)
@@ -217,8 +217,8 @@ class Monsters(commands.Cog):
       if self.battle_over():
         print("game loop battle is over")
         if self.monster.times_up():
-          if self.mondb.config.level > 1:
-            self.mondb.config.level = self.mondb.config.level - 1
+          if self.mondb.config['level'] > 1:
+            self.mondb.config['level'] = self.mondb.config['level'] - 1
             self.mondb.save_config()
         print('call end battle')
         await self.end_battle()
