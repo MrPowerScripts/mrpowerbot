@@ -95,7 +95,9 @@ class MonDB():
     self._load_config()
     return self.config
   
-  def save_config(self, config=self.config):
+  def save_config(self, config=None):
+    if config:
+      self.config = config
     self._save_config()
 
   def add_stat(self, stat, value=1):
