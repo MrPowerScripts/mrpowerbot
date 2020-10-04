@@ -13,7 +13,7 @@ class MonDB():
     self.conn = conn
     self.cur = self.conn.cursor()
     self.mondata = None
-    self.config = self._fetch_config()
+    self.config = None
 
   def _save(self):
     try:
@@ -68,7 +68,7 @@ class MonDB():
       raise e
 
   #only run this on instance
-  def _fetch_config(self):
+  def fetch_config(self):
     try:
       self.cur.execute("""
       SELECT mondata
