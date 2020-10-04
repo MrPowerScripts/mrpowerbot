@@ -188,8 +188,8 @@ class Monsters(commands.Cog):
             print(f"monster hit - current hp: {self.monster.hp}")
             if self.monster.hp > 0:
               print("monster still alive")
-              if self.monster.hp % 5 == 0:
-                await self.monster_message.edit(content=self.mm_formated())
+              # if self.monster.hp % 5 == 0:
+              #   await self.monster_message.edit(content=self.mm_formated())
               self.monster.remove_hp(1)
               print("hurt monster")
               if self.monster.hp < 1 and self.killing_blow == None:
