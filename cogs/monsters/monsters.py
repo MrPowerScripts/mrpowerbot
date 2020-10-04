@@ -145,6 +145,7 @@ class Monsters(commands.Cog):
     self.montest = False
     self.last_run = int(time.time())
 
+    print("saving the config")
     self.mondb.config.level = self.mondb.config.level + 1
     self.mondb.save_config()
 

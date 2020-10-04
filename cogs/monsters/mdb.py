@@ -42,6 +42,7 @@ class MonDB():
       raise e
 
   def _save_config(self):
+    print("saving config")
     try:
       self.cur.execute("""
       INSERT INTO users ("mondata", "discord_id") 
@@ -102,6 +103,7 @@ class MonDB():
     return self.config
   
   def save_config(self, config=None):
+    print("called save config")
     if config:
       self.config = config
     self._save_config()
