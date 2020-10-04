@@ -79,7 +79,7 @@ class MonDB():
       print(f"db result: {result}")
       print(type(result))
       print(f"does this work: {result == '{}'}")
-      if result == "\{\}" or result == None:
+      if not result:
         print("db config empty - using default")
         return config
       else:
