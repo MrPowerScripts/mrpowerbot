@@ -129,6 +129,7 @@ class Monsters(commands.Cog):
     print("starting monster game")
     try:
       if self.montest:
+        print("running test battle")
         self.monster = MiniMonster(level=self.mondb.config['level'])
       else:
         self.monster = random.choice(monster_mash)(level=self.mondb.config['level'])
