@@ -1,12 +1,22 @@
 import random
 import time
 
+monster_meta = [
+  {"name": "Mini Monster", "image": "〴⋋⋌〵"},
+  {"name": "Battle Twins", "image": "つ ◕_◕ ༽つ つ ◕_◕ ༽つ"},
+  {"name": "Pure Anger", "image": "ლ(ಠ益ಠ)ლ"},
+  {"name": "Bear", "image": "ʕ•ᴥ•ʔ"},
+  {"name": "Bully", "image": "(ง'̀-'́)ง"},
+  {"name": "Squid", "image": "くコ:彡"},
+  {"name": "Killer Turtle", "image": "𓆉"},
+]
+
 class Monster():
-  def __init__(self, level=1):
+  def __init__(self, level=1, blueprint=random.choice(monster_meta)):
     self.hp = (random.randint(1, 2) + 1) * level
     self.max_hp = 0
-    self.name = "Monster"
-    self.image = "〴⋋_⋌〵"
+    self.name = blueprint['name']
+    self.image = blueprint['image']
     self.status = "Rawr"
     self.escape_time = int(time.time()) + 600
 
@@ -24,45 +34,3 @@ class Monster():
       return True
     else:
       return False
-
-class MiniMonster(Monster):
-  def __init__(self, level=1):
-    super().__init__()
-    self.name = "Mini Monster"
-    self.image = "〴⋋⋌〵"
-
-class BattleTwins(Monster):
-  def __init__(self, level=1):
-    super().__init__()
-    self.name = "Battle Twins"
-    self.image = "つ ◕_◕ ༽つ つ ◕_◕ ༽つ"
-
-class PureAnger(Monster):
-  def __init__(self, level=1):
-    super().__init__()
-    self.name = "Pure Anger"
-    self.image = "ლ(ಠ益ಠ)ლ"
-
-class Bear(Monster):
-  def __init__(self, level=1):
-    super().__init__()
-    self.name = "Bear"
-    self.image = "ʕ•ᴥ•ʔ"
-
-class Bully(Monster):
-  def __init__(self, level=1):
-    super().__init__()
-    self.name = "Bully"
-    self.image = "(ง'̀-'́)ง"
-
-class Squid(Monster):
-  def __init__(self, level=1):
-    super().__init__()
-    self.name = "Squid"
-    self.image = "くコ:彡"
-
-class Killer_Turtle(Monster):
-  def __init__(self, level=1):
-    super().__init__()
-    self.name = "Killer Turtle"
-    self.image = "𓆉"

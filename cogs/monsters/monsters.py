@@ -5,20 +5,7 @@ import db
 from bot import client
 from . import mdb
 from .mdb import MonDB
-from .mons import (
-  Monster,
-  MiniMonster,
-  BattleTwins,
-  Bear,
-  PureAnger,
-  Bully,
-  Squid,
-  Killer_Turtle,
-)
-
-monster_mash = [
-  Monster, MiniMonster, BattleTwins, 
-  Bear, PureAnger, Bully, Squid, Killer_Turtle]
+from .mons import Monster
 
 from utils import (
   TEST_CHANNEL, MRPSBOT_CHANNEL, MONSTERS_ROLE, 
@@ -129,10 +116,10 @@ class Monsters(commands.Cog):
     print("starting monster game")
     try:
       if self.montest:
-        print("running test battle")
-        self.monster = MiniMonster(level=self.mondb.config['level'])
+        print("running test battle")s
+        self.monster = Monster(level=self.mondb.config['level'])
       else:
-        self.monster = random.choice(monster_mash)(level=self.mondb.config['level'])
+        self.monster = Monster(level=self.mondb.config['level'])
       self.monster.max_hp = self.monster.hp
       self.killing_blow = None
     except Exception as e:
