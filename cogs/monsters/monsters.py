@@ -120,7 +120,7 @@ class Monsters(commands.Cog):
           self.mondb.config = self.mondb.fetch_config()
           print(f"monster config post fetch: {self.mondb.config}")
         
-        self.monster = random.choice(monster_mash)(level=self.mondb.config.level)
+        self.monster = random.choice(monster_mash)(level=self.mondb.config['level'])
       self.monster.max_hp = self.monster.hp
       self.killing_blow = None
     except Exception as e:
