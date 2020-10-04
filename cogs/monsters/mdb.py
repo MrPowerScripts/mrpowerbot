@@ -75,11 +75,12 @@ class MonDB():
       FROM users 
       WHERE discord_id = %(discord_id)s;
       """, {"discord_id": int(MRPOWERBOT)})
-      result = self.cur.fetchone()[0]
+      result = self.cur.fetchone()
       if result == None:
         return config
-      return self.cur.fetchone()[0]
-      print(f"Bot Config: {self.config}")
+      else:
+        return result[0]
+      # print(f"Bot Config: {self.config}")
     except Exception as e:
       print(e)
       raise e
