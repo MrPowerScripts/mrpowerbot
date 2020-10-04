@@ -116,7 +116,7 @@ class Monsters(commands.Cog):
     print("starting monster game")
     try:
       if self.montest:
-        print("running test battle")s
+        print("running test battle")
         self.monster = Monster(level=self.mondb.config['level'])
       else:
         self.monster = Monster(level=self.mondb.config['level'])
