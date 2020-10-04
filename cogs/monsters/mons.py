@@ -3,7 +3,7 @@ import time
 
 class Monster:
   def __init__(self, level=1):
-    self.hp = (random.randint(1, 2) + 1
+    self.hp = (random.randint(1, 2) + 1) * level
     self.max_hp = 0
     self.name = "Monster"
     self.image = "〴⋋_⋌〵"
