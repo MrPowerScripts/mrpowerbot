@@ -84,7 +84,7 @@ class Monsters(commands.Cog):
     battle_over = self.battle_over()
     try:
       if battle_over:
-        print("battle is over")
+        print("mm: battle is over")
         attackers = list(map(lambda m: f"<@{m}>: {self.monster_attackers[m]}", self.monster_attackers))
         print("attackers listed")
       return f"""
@@ -137,7 +137,6 @@ class Monsters(commands.Cog):
     self.battling = True
     print("battle start finish")
     print(self.mm_formated())
-
 
   async def end_battle(self):
     print("ending battle")
@@ -206,7 +205,8 @@ class Monsters(commands.Cog):
               print(self.monster_attackers)
             else:
               print("monster dead game update")
-
+    else:
+      print('not battling - ignoring emoji')
   @tasks.loop(seconds=1.0)
   async def run_monsters(self):
     print('monster loop')
@@ -218,6 +218,7 @@ class Monsters(commands.Cog):
           if self.mondb.config.level > 1:
             self.mondb.config.level = self.mondb.config.level - 1
             self.mondb.save_config()
+        print('call end battle')
         await self.end_battle()
       else:
         print("game loop tick")
