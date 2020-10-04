@@ -12,7 +12,9 @@ monster_meta = [
 ]
 
 class Monster():
-  def __init__(self, level=1, blueprint=random.choice(monster_meta)):
+  def __init__(self, level=1, blueprint=None):
+    if not blueprint:
+      blueprint = random.choice(monster_meta)
     self.hp = (random.randint(1, 2) + 1) * level
     self.max_hp = 0
     self.name = blueprint['name']
