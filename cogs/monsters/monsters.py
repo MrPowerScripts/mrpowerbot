@@ -120,6 +120,8 @@ class Monsters(commands.Cog):
       return False
 
   async def start_battle(self):
+    if self.mondb.config == None:
+      self.mondb.config = self.mondb.fetch_config()
     print("starting monster game")
     try:
       if self.montest:
@@ -127,8 +129,6 @@ class Monsters(commands.Cog):
       else:
         print(f"monster config: {self.mondb.config}")
         #first run, load config
-        if self.mondb.config == None:
-          self.mondb.config = self.mondb.fetch_config()
           print(f"monster config post fetch: {self.mondb.config}")
         
         self.monster = random.choice(monster_mash)(level=self.mondb.config['level'])
