@@ -118,6 +118,7 @@ class Monsters(commands.Cog):
         #first run, load config
         if self.mondb.config == None:
           self.mondb.config = self.mondb.fetch_config()
+          print(f"monster config post fetch: {self.mondb.config}")
         
         self.monster = random.choice(monster_mash)(level=self.mondb.config.level)
       self.monster.max_hp = self.monster.hp
