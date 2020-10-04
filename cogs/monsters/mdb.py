@@ -77,8 +77,10 @@ class MonDB():
       """, {"discord_id": int(MRPOWERBOT)})
       result = self.cur.fetchone()
       if result == None:
+        print("dbc config empty - using default")
         return config
       else:
+        print("loaded db from config")
         return result[0]
       # print(f"Bot Config: {self.config}")
     except Exception as e:

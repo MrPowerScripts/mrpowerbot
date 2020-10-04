@@ -175,6 +175,7 @@ class Monsters(commands.Cog):
   @commands.Cog.listener()
   async def on_ready(self):
     self.game_channel = self.bot.get_channel(MRPSBOT_CHANNEL)
+    print(f"mon config: {self.mondb.config}")
     print("monsters ready")
 
   @commands.Cog.listener()
