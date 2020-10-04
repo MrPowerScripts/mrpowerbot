@@ -157,10 +157,6 @@ class Monsters(commands.Cog):
     self.montest = False
     self.last_run = int(time.time())
 
-    print("saving the config")
-    self.mondb.config['level'] = self.mondb.config['level'] + 1
-    self.mondb.save_config()
-
     # mpbzaps = db.zaps(MRPOWERBOT)
 
     print("saving battle stats")
@@ -189,6 +185,17 @@ class Monsters(commands.Cog):
     # db.zap(mpb_user, value=mpbzaps, remove=True)
     print("battle over - updating message")
     await self.monster_message.edit(content=self.mm_formated())
+
+    print("updating level: saving the config")
+    print(f"current level: {self.mondb.config['level']}")
+    if self.monster.times_up():
+      if self.mondb.config['level'] > 1:
+        self.mondb.config['level'] = self.mondb.config['level'] - 1
+        self.mondb.save_config()
+    else:
+      self.mondb.config['level'] = self.mondb.config['level'] + 1
+      self.mondb.save_config()
+    print(f"new level: {self.mondb.config['level']}")
     print("end_battle finished")
   
   @commands.Cog.listener()
@@ -229,10 +236,6 @@ class Monsters(commands.Cog):
       print("we battling")
       if self.battle_over():
         print("game loop battle is over")
-        if self.monster.times_up():
-          if self.mondb.config['level'] > 1:
-            self.mondb.config['level'] = self.mondb.config['level'] - 1
-            self.mondb.save_config()
         print('call end battle')
         await self.end_battle()
       else:
