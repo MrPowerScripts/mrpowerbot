@@ -150,6 +150,7 @@ class Monsters(commands.Cog):
 
     # mpbzaps = db.zaps(MRPOWERBOT)
 
+    print("saving battle stats")
     atckr_count = len(self.monster_attackers.values())
     # solo kills
     if atckr_count== 1:
@@ -175,7 +176,7 @@ class Monsters(commands.Cog):
     # db.zap(mpb_user, value=mpbzaps, remove=True)
     print("battle over - updating message")
     await self.monster_message.edit(content=self.mm_formated())
-    print("battle finished")
+    print("end_battle finished")
   
   @commands.Cog.listener()
   async def on_ready(self):
