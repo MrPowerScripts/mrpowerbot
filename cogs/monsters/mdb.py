@@ -76,7 +76,7 @@ class MonDB():
       WHERE discord_id = %(discord_id)s;
       """, {"discord_id": int(MRPOWERBOT)})
       result = self.cur.fetchone()
-      if result == None:
+      if result == '{}':
         print("dbc config empty - using default")
         return config
       else:
