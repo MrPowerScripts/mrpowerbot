@@ -91,8 +91,9 @@ class MonDB():
       print(e)
       raise e
 
-  def update_config(self, config, value):
-    self._load_config()
+  def update_config(self, config, value, load=False):
+    if load:
+      self._load_config()
     if not config in self.config:
       self.config[config] = 0
     self.config[config] += value

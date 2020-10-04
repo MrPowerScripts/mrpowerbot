@@ -58,6 +58,17 @@ class Monsters(commands.Cog):
     print(f"testings")
 
   @commands.command()
+  @commands.has_role(MOD_ROLE)
+  async def monlevel(self, ctx, level: int):
+    try:
+      self.mondb.update_config('level', level)
+      else:
+        await ctx.message.add_reaction("✅")
+    except Exception as e:
+      await ctx.message.add_reaction("❌")
+    print(f"set level")
+
+  @commands.command()
   async def monstats(self, ctx):
     try:
       print("getting stats")
@@ -91,6 +102,7 @@ class Monsters(commands.Cog):
         <@&{MONSTERS_ROLE}> has arrived! Tap ⚡ repeatedly to attack!
         {self.monster.image}
         `Name:` {self.monster.name}
+        `Level:` {self.mondb.config['level']}
         `HP:` {self.monster.hp}/{self.monster.max_hp}
         `Status:` {self.monster.status}
         {f"`Attackers:` {attackers}" if battle_over and len(attackers) > 0 else ""}
@@ -209,6 +221,7 @@ class Monsters(commands.Cog):
               print("monster dead game update")
     else:
       print('not battling - ignoring emoji')
+
   @tasks.loop(seconds=1.0)
   async def run_monsters(self):
     print('monster loop')
