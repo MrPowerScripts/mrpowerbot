@@ -124,7 +124,7 @@ class Monsters(commands.Cog):
     print("starting monster game")
     try:
       if self.montest:
-        self.monster = MiniMonster()
+        self.monster = MiniMonster(level=self.mondb.config['level'])
       else:
         print(f"monster config: {self.mondb.config}")
         #first run, load config
