@@ -207,7 +207,7 @@ class Monsters(commands.Cog):
       print("we battling")
       if self.battle_over():
         print("game loop battle is over")
-        if self.monster.times_up()
+        if self.monster.times_up():
           if self.mondb.config.level > 1:
             self.mondb.config.level = self.mondb.config.level - 1
             self.mondb.save_config()
