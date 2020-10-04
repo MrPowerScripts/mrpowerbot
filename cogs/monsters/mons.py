@@ -1,7 +1,7 @@
 import random
 import time
 
-class Monster(level=):
+class Monster():
   def __init__(self, level=1):
     self.hp = (random.randint(1, 2) + 1) * level
     self.max_hp = 0
@@ -26,7 +26,7 @@ class Monster(level=):
       return False
 
 class MiniMonster(Monster):
-  def __init__(self):
+  def __init__(self, level=1):
     super().__init__()
     self.name = "Mini Monster"
     self.image = "〴⋋⋌〵"
