@@ -85,9 +85,11 @@ class MonDB():
         return config
       else:
         print("loaded config from db")
-        return result[0]
+        print(result)
+        return result
       # print(f"Bot Config: {self.config}")
     except Exception as e:
+      print("error fetching config")
       print(e)
       raise e
 
