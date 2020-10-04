@@ -114,6 +114,7 @@ class Monsters(commands.Cog):
       if self.montest:
         self.monster = MiniMonster()
       else:
+        print(f"monster config: {self.mondb.config}")
         self.monster = random.choice(monster_mash)(level=self.mondb.config.level)
       self.monster.max_hp = self.monster.hp
       self.killing_blow = None
