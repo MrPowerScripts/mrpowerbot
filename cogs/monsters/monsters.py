@@ -62,8 +62,7 @@ class Monsters(commands.Cog):
   async def monlevel(self, ctx, level: int):
     try:
       self.mondb.update_config('level', level)
-      else:
-        await ctx.message.add_reaction("✅")
+      await ctx.message.add_reaction("✅")
     except Exception as e:
       await ctx.message.add_reaction("❌")
     print(f"set level")
