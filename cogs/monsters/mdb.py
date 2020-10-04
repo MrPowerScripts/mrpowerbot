@@ -77,7 +77,7 @@ class MonDB():
       """, {"discord_id": int(MRPOWERBOT)})
       result = self.cur.fetchone()[0]
       print(f"db result: {result}")
-      print(dir(result))
+      print(type(result))
       print(f"does this work: {result == '{}'}")
       if result == "\{\}" or result == None:
         print("db config empty - using default")
