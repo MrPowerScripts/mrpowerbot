@@ -2,6 +2,7 @@ import json
 import os
 import psycopg2
 from utils import MRPOWERBOT
+from .utils import config
 
 DATABASE_URL = os.environ['DATABASE_URL']
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
@@ -12,6 +13,7 @@ class MonDB():
     self.conn = conn
     self.cur = self.conn.cursor()
     self.mondata = None
+    self.config = self._fetch_config()
 
   def _save(self):
     try:
@@ -38,6 +40,63 @@ class MonDB():
     except Exception as e:
       print(e)
       raise e
+
+  def _save_config(self):
+    try:
+      self.cur.execute("""
+      INSERT INTO users ("mondata", "discord_id") 
+      VALUES (%(mondata)s, '%(discord_id)s')
+      ON CONFLICT (discord_id) DO UPDATE
+      SET mondata = %(mondata)s;
+      """, {"discord_id": MRPOWERBOT, "mondata": json.dumps(self.config)})
+      self.conn.commit()
+    except Exception as e:
+      print(e)
+      raise e
+
+  def _load_config(self):
+    try:
+      self.cur.execute("""
+      SELECT mondata
+      FROM users 
+      WHERE discord_id = %(discord_id)s;
+      """, {"discord_id": int(MRPOWERBOT)})
+      self.config = self.cur.fetchone()[0]
+      print(f"Bot Config: {self.config}")
+    except Exception as e:
+      print(e)
+      raise e
+
+  #only run this on instance
+  def _fetch_config(self):
+    try:
+      self.cur.execute("""
+      SELECT mondata
+      FROM users 
+      WHERE discord_id = %(discord_id)s;
+      """, {"discord_id": int(MRPOWERBOT)})
+      result = self.cur.fetchone()[0]
+      if result == None:
+        return config
+      return self.cur.fetchone()[0]
+      print(f"Bot Config: {self.config}")
+    except Exception as e:
+      print(e)
+      raise e
+
+  def update_config(self, config, value):
+    self._load_config()
+    if not config in self.config:
+      self.config[config] = 0
+    self.config[config] += value
+    self._save_config()
+
+  def get_config(self):
+    self._load_config()
+    return self.config
+  
+  def save_config(self, config=self.config):
+    self._save_config()
 
   def add_stat(self, stat, value=1):
     self._load()

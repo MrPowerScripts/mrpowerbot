@@ -114,7 +114,7 @@ class Monsters(commands.Cog):
       if self.montest:
         self.monster = MiniMonster()
       else:
-        self.monster = random.choice(monster_mash)()
+        self.monster = random.choice(monster_mash)(level=self.mondb.config.level)
       self.monster.max_hp = self.monster.hp
       self.killing_blow = None
     except Exception as e:
@@ -139,6 +139,9 @@ class Monsters(commands.Cog):
     self.battling = False
     self.montest = False
     self.last_run = int(time.time())
+
+    self.mondb.config.level = self.mondb.config.level + 1
+    self.mondb.save_config()
 
     # mpbzaps = db.zaps(MRPOWERBOT)
 
@@ -204,6 +207,10 @@ class Monsters(commands.Cog):
       print("we battling")
       if self.battle_over():
         print("game loop battle is over")
+        if self.monster.times_up()
+          if self.mondb.config.level > 1:
+            self.mondb.config.level = self.mondb.config.level - 1
+            self.mondb.save_config()
         await self.end_battle()
       else:
         print("game loop tick")
