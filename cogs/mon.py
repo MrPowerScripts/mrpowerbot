@@ -9,6 +9,8 @@ monster_meta = [
   {"name": "Bully", "image": "(ง'̀-'́)ง"},
   {"name": "Squid", "image": "くコ:彡"},
   {"name": "Killer Turtle", "image": "𓆉"},
+  {"name": "Ant", "image": "🐜"},
+
 ]
 
 class Monster():
