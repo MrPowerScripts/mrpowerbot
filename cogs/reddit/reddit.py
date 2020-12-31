@@ -22,12 +22,17 @@ class Reddit(commands.Cog):
     self.mrpssub = self.rapi.subreddit("mrpowerscripts")
     self.announce_channel = discord.utils.get(self.bot.get_all_channels(), id=ANNOUNCE_CHANNEL)
 
+  @commands.Cog.listener()
+  async def on_ready(self):
+    print(f"reddit account: {self.rapi.user.me()}")
+
   @commands.command()
   @commands.has_role(MRPOWER_ROLE)
   async def postr(self, ctx, title: str, content: str):
     
     print(f"title is: {title}")
     print(f"content is: {content}")
+    
 
     if validators.url(content.strip()):
       params = {"title": title, "url": content.strip()}
