@@ -6,7 +6,7 @@ from utils import (
 
 class Reddit(commands.Cog):
   def __init__(self, bot):
-  self.bot = bot
+    self.bot = bot
 
   @commands.command()
   @commands.has_role(MRPOWER_ROLE)
