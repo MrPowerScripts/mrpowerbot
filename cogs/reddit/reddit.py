@@ -33,7 +33,6 @@ class Reddit(commands.Cog):
     print(f"title is: {title}")
     print(f"content is: {content}")
     
-
     if validators.url(content.strip()):
       params = {"title": title, "url": content.strip()}
     else:
@@ -41,12 +40,11 @@ class Reddit(commands.Cog):
     
     try:
       post = self.mrpssub.submit(**params)
+      
+      announce_channel = discord.utils.get(self.bot.get_all_channels(), id=ANNOUNCE_CHANNEL)
+      await announce_channel.send(f"New <@&{REDDIT_NOTIFY_ROLE}> post!\n {post.permalink}")
     except Exception as e:
       print(e)
-
-    announce_channel = discord.utils.get(self.bot.get_all_channels(), id=ANNOUNCE_CHANNEL)
-
-    await announce_channel.send(f"New <@&{REDDIT_NOTIFY_ROLE}> post!\n {post.url}")
 
 
 def setup(bot):
