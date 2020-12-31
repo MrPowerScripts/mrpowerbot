@@ -10,6 +10,7 @@ verify_ssl = true
 pipenv = "*"
 psycopg2-binary = "*"
 praw = "*"
+validators = "*"
 
 [requires]
 python_version = "3.7"
