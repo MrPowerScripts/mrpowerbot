@@ -39,7 +39,9 @@ class Reddit(commands.Cog):
     except Exception as e:
       print(e)
 
-    await self.announce_channel.send(f"New <@&{REDDIT_NOTIFY_ROLE}> post!\n {post.url}")
+    announce_channel = discord.utils.get(self.bot.get_all_channels(), id=ANNOUNCE_CHANNEL)
+
+    await announce_channel.send(f"New <@&{REDDIT_NOTIFY_ROLE}> post!\n {post.url}")
 
 
 def setup(bot):
