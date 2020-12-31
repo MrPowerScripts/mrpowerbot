@@ -8,7 +8,7 @@ module. There are a number of utility commands being showcased here.'''
 client = discord.Client()
 bot = commands.Bot(command_prefix=prefix, description=description)
 
-initial_extensions = ['cogs.main']
+initial_extensions = ['cogs.main', 'cogs.reddit.reddit']
 
 # retired cogs
 # 'cogs.monsters.monsters', 

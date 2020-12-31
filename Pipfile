@@ -9,6 +9,7 @@ verify_ssl = true
 "discord.py" = "*"
 pipenv = "*"
 psycopg2-binary = "*"
+praw = "*"
 
 [requires]
 python_version = "3.7"
