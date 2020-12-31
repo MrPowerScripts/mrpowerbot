@@ -13,7 +13,7 @@ reddit = praw.Reddit(client_id=os.environ['REDDIT_CLIENT_ID'],
                      client_secret=os.environ['REDDIT_CLIENT_SECRET'],
                      password=os.environ['REDDIT_PASSWORD'],
                      user_agent="mrpowerbot script by u/mrpowerscripts",
-                     username="mrpowerscripts")
+                     username="mrpowerbot")
 
 class Reddit(commands.Cog):
   def __init__(self, bot):
