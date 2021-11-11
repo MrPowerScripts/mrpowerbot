@@ -30,7 +30,7 @@ class Flashlang(commands.Cog):
     print("flashlang ready")
 
 
-  @tasks.loop(seconds=20.0)
+  @tasks.loop(seconds=3600.0)
   async def run_flashlang(self):
     print("running flashlang")
     if self.ready:
