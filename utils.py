@@ -1,5 +1,6 @@
 import json
 import random
+from os.path import exists
 
 # accounts
 MRPOWERBOT=733402362852540516
@@ -19,10 +20,13 @@ MED_CHANNEL=510821302773219337
 MRPSBOT_CHANNEL=733415265894662205
 REDDIT_BOT_CHANNEL=697805367782146198
 
-dyno_data = open("/etc/heroku/dyno").read()
-print(dyno_data)
-dyno_data = json.loads(dyno_data)
-REVISION = dyno_data.get("release").get("commit")[0:7]
+if exists("/etc/heroku/dyno"):
+  dyno_data = open("/etc/heroku/dyno").read()
+  print(dyno_data)
+  dyno_data = json.loads(dyno_data)
+  REVISION = dyno_data.get("release").get("commit")[0:7]
+else:
+  REVISION = "local"
 
 def prob(probability):
   rando = random.random()
