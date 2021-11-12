@@ -8,10 +8,10 @@ module. There are a number of utility commands being showcased here.'''
 client = discord.Client()
 bot = commands.Bot(command_prefix=prefix, description=description)
 
-initial_extensions = ['cogs.main', 'cogs.flashlang.flashlang', 'cogs.reddit.reddit']
+initial_extensions = ['cogs.main', 'cogs.reddit.reddit']
 
 # retired cogs
-# 'cogs.monsters.monsters', 
+# 'cogs.monsters.monsters','cogs.flashlang.flashlang' 
 
 for extension in initial_extensions:
     bot.load_extension(extension)
